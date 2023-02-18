@@ -1,0 +1,60 @@
+.flexCenter {
+    display: flex;
+    justify-content: center;
+
+}
+.loginUzivMain{
+    background-color: #1F2B37;
+    margin-top: 2em;
+    width: 40%;
+    display: flex;
+    justify-content: center;
+}
+.uzivZonaNadpis{
+    text-align: center;
+    font-size: 1.2em;
+    font-family: Arial;
+    color: #4F76F6;
+}
+.uzivZonaPopis {
+    color: white;
+    font-family: Arial;
+    text-align: center;
+}
+
+.inputText{
+    border: none;
+    margin: 0.2em;
+    padding-bottom: 0.6em;
+    padding-top: 0.6em;
+    padding-left: 1em;
+    padding-right: 1em;
+    background-color: #1F2B37;
+    border-bottom: 3px solid  #77F2A1;
+    color: white;
+}
+
+.inputSubmit{
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    padding-left: 2em;
+    padding-right: 2em;
+    margin: 1em;
+    font-size: 0.9em;
+    font-family: Arial;
+    background-color: #4F76F6;
+    color: white;
+    border: none;
+    transition: 0.2s;
+}
+
+.inputSubmit:hover{
+    cursor: pointer;
+    padding-right: 2.2em;
+    padding-left: 2.2em;
+    transition: 0.2s;
+}
+
+.inputText:focus {
+    outline: none;
+}

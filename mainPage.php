@@ -10,21 +10,19 @@
 <nav>
 
 
-
     <div class="header">
-        <img class="logoMain" src="img/logo.svg">
-        W e b h o s t i n g
-
+        <a class="noDecor" href="index.php">
+            <img class="logoMain" src="img/logo.svg">
+            W e b h o s t i n g</a>
     </div>
-
 
 
     </div>
     <div class="sluzby-dropdown">
         <button class="sluzby-dropbtn">Služby</button>
         <div class="sluzby-dropdown-content">
-            <a href="#">Link 1</a>
-            <a href="#">Link 2</a>
+            <a href="#">Webhosting</a>
+            <a href="#">VM hosting</a>
             <a href="#">Link 3</a>
         </div>
     </div>
@@ -32,9 +30,8 @@
     <div class="prihlaseni-dropdown">
         <button class="prihlaseni-dropbtn">Přihlášení</button>
         <div class="prihlaseni-dropdown-content">
-            <a href="#">Link 1</a>
-            <a href="#">Link 2</a>
-            <a href="#">Link 3</a>
+            <a href="loginUzivZona.php">Uživatelská zóna</a>
+            <a href="#">Správa služeb</a>
         </div>
     </div>
 </nav>
