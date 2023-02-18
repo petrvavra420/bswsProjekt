@@ -1,0 +1,265 @@
+
+body{
+    margin: 0 auto;
+    background-color: #1F2B37;
+    color: #1F2B37;
+    color: #4F76F6;
+    color: #F9F9F9;
+    color: #77F2A1;
+}
+.header{
+    color: whitesmoke;
+    padding: 16px;
+    font-size: 1em;
+    width: 20%;
+    height: 100%;
+    font-family: Arial;
+    text-align: center;
+    background: rgb(255,255,255);
+    background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(79,118,246,1) 100%);
+}
+
+.logoMain{
+    max-height: 2em;
+}
+
+
+
+nav {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+
+
+/* Dropdown Button */
+.prihlaseni-dropbtn {
+    background-color: #4F76F6;
+    color: white;
+    width: 100%;
+    height: 100%;
+    font-size: 20px;
+    border: none;
+    font-family: "Arial";
+
+
+
+}
+
+/* The container <div> - needed to position the dropdown content */
+.prihlaseni-dropdown {
+    position: relative;
+    display: inline-block;
+    width: 40%;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.prihlaseni-dropdown-content {
+    position: absolute;
+    background-color: #1F2B39;
+
+    min-width: 160px;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+
+    max-height: 0;
+    transition: max-height 0.15s ease-out;
+    overflow: hidden;
+}
+
+/* Links inside the dropdown */
+.prihlaseni-dropdown-content a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    transition: 0.05s;
+    font-family: Arial;
+}
+
+/* Change color of dropdown links on hover */
+.prihlaseni-dropdown-content a:hover {
+    background-color: #1F2B37;
+    border-right: 5px solid #77F2A1;
+    border-left: 5px solid #77F2A1;
+    transition: 0.05s;
+    color: #77F2A1;
+
+}
+
+/* Show the dropdown menu on hover */
+.prihlaseni-dropdown:hover .prihlaseni-dropdown-content {
+    max-height: 500px;
+    transition: max-height 0.25s ease-in;
+}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.prihlaseni-dropdown:hover .prihlaseni-dropbtn {
+    background-color: #4F76F6;
+}
+
+    /* Dropdown Button */
+.sluzby-dropbtn {
+    background-color: #4F76F6;
+    color: white;
+    width: 100%;
+    height: 100%;
+    font-size: 20px;
+    border: none;
+    font-family: "Arial";
+    border-right: 3px solid white;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.sluzby-dropdown {
+    position: relative;
+    width: 40%;
+    display: inline-block;
+
+}
+
+/* Dropdown Content (Hidden by Default) */
+.sluzby-dropdown-content {
+    position: absolute;
+    background-color: #1F2B39;
+    width: 100%;
+    text-align: center;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+
+    max-height: 0;
+    transition: max-height 0.15s ease-out;
+    overflow: hidden;
+}
+
+/* Links inside the dropdown */
+.sluzby-dropdown-content a {
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    transition: 0.05s;
+    font-family: Arial;
+}
+
+
+/* Change color of dropdown links on hover */
+.sluzby-dropdown-content a:hover {
+    background-color: #1F2B37;
+    border-right: 5px solid #77F2A1;
+    border-left: 5px solid #77F2A1;
+    transition: 0.05s;
+    color: #77F2A1;
+}
+
+/* Show the dropdown menu on hover */
+.sluzby-dropdown:hover .sluzby-dropdown-content {
+    max-height: 500px;
+    transition: max-height 0.25s ease-in;
+}
+
+
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.sluzby-dropdown:hover .sluzby-dropbtn {background-color: #4F76F6;}
+
+
+/* pozadí */
+body {
+    -webkit-animation: theme 21s linear infinite;
+    animation: theme 21s linear infinite;
+}
+body:after, body:before {
+    content: "";
+    display: block;
+    position: fixed;
+    z-index: -1;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    width: 100vmax;
+    height: 100vmax;
+    background: rgba(0, 0, 0, 0.05);
+    -webkit-animation: background 90s linear infinite;
+    animation: background 90s linear infinite;
+}
+body:after {
+    left: 15vw;
+}
+body:before {
+    right: 15vw;
+    -webkit-animation-delay: -30s;
+    animation-delay: -30s;
+    animation-direction: reverse;
+}
+
+@-webkit-keyframes theme {
+    0% {
+        background: #1F2B37;
+    }
+    16% {
+        background: #1F2B37;
+    }
+    33% {
+        background: #1F2B37;
+    }
+    50% {
+        background: #1F2B37;
+    }
+    66% {
+        background: #1F2B37;
+    }
+    83% {
+        background: #1F2B37;
+    }
+    100% {
+        background: #1F2B37;
+    }
+}
+
+@keyframes theme {
+    0% {
+        background: #1F2B37;
+    }
+    16% {
+        background: #1F2B37;
+    }
+    33% {
+        background: #1F2B37;
+    }
+    50% {
+        background: #1F2B37;
+    }
+    66% {
+        background: #1F2B37;
+    }
+    83% {
+        background: #1F2B37;
+    }
+    100% {
+        background: #1F2B37;
+    }
+}
+@-webkit-keyframes background {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+@keyframes background {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+
+
+

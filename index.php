@@ -1,3 +1,4 @@
 <?php
-echo "jirka je zebrak";
+include "mainPage.php";
 ?>
+
