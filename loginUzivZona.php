@@ -43,14 +43,34 @@
             $canLogin = false;
         }
         if (isset($_POST['password'])) {
-            $name = $_POST['password'];
+            $password = $_POST['password'];
         } else {
             $canLogin = false;
         }
 
-        if ($canLogin == true){
-            //login jo
-        }else {
+        if ($canLogin == true) {
+            //login
+            session_start();
+            include "dbcon.php";
+            $sqlUse = "use projekt";
+            $sendUse = mysqli_query($conn, $sqlUse);
+            $sql = "SELECT id FROM uz_zona_login WHERE (username ='" . $name . "' OR email ='" . $name . "') AND password = '" . $password . "'";
+            $result = mysqli_query($conn, $sql);
+            $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+            $userFoundCount = mysqli_num_rows($result);
+
+            if ($userFoundCount == 1) {
+                $sql = "SELECT username FROM uz_zona_login WHERE id = $row[id]";
+                $result = mysqli_query($conn,$sql);
+                $rowLogin = mysqli_fetch_array($result,MYSQLI_ASSOC);
+                $loginFromDB = $rowLogin['username'];
+                $_SESSION['logged_user'] = $loginFromDB;
+                echo "Přihlášený jako: $_SESSION[logged_user]";
+            } else {
+                echo "Špatnej login bro";
+            }
+
+        } else {
             echo "Špatné přihlašovací údaje.";
         }
     }
