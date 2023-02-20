@@ -1,10 +1,11 @@
 <?php
 $servername = "10.0.10.4:3306";
-$username = "peta";
+
+$usernameDB = "peta";
 $passwordDB = "petadb69";
 
 // Create connection
-$conn = mysqli_connect($servername, $username, $passwordDB);
+$conn = mysqli_connect($servername, $usernameDB, $passwordDB);
 
 // Check connection
 if (!$conn) {
