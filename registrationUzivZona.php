@@ -27,7 +27,6 @@
                 <p class="uzivZonaNadpis">Registrace
                 </p>
 
-
                 <input placeholder="Uživ. jméno" class="inputText" required type="text"><br>
                 <input placeholder="E-mail" class="inputText" required type="text"><br>
                 <input placeholder="Heslo" class="inputText" required type="password"><br>
