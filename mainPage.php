@@ -31,6 +31,7 @@
         <button class="prihlaseni-dropbtn">Přihlášení</button>
         <div class="prihlaseni-dropdown-content">
             <a href="loginUzivZona.php">Uživatelská zóna</a>
+            <a href="registrationUzivZona.php">Registrace</a>
             <a href="#">Správa služeb</a>
         </div>
     </div>
