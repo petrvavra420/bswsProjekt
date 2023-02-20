@@ -20,20 +20,41 @@
 </nav>
 <main>
     <div class="flexCenter">
-        <div  class="loginUzivMain">
-            <form>
+        <div class="loginUzivMain">
+            <form method="post" action="">
                 <p class="uzivZonaNadpis">Uživatelská zóna
                 </p>
 
-
-                <input placeholder="Uživ. jméno nebo e-mail" class="inputText" required type="text"><br>
-                <input placeholder="Heslo" class="inputText" required type="password"><br>
+                <input name="name" placeholder="Uživ. jméno nebo e-mail" class="inputText" required type="text"><br>
+                <input name="password" placeholder="Heslo" class="inputText" required type="password"><br>
                 <div class="flexCenter">
-                    <input class="inputSubmit" value="Přihlásit" type="submit">
+                    <input class="inputSubmit" value="Přihlásit" name="loginUzivSubmit" type="submit">
                 </div>
             </form>
         </div>
     </div>
+
+    <?php
+    if (isset($_POST['loginUzivSubmit'])) {
+        $canLogin = true;
+        if (isset($_POST['name'])) {
+            $name = $_POST['name'];
+        } else {
+            $canLogin = false;
+        }
+        if (isset($_POST['password'])) {
+            $name = $_POST['password'];
+        } else {
+            $canLogin = false;
+        }
+
+        if ($canLogin == true){
+            //login jo
+        }else {
+            echo "Špatné přihlašovací údaje.";
+        }
+    }
+    ?>
 </main>
 
 

@@ -36,6 +36,9 @@
     </div>
 </nav>
 <main>
+    <?php
+        include("dbcon.php");
+    ?>
 </main>
 
 
