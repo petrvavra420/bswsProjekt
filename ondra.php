@@ -20,8 +20,8 @@
 </nav>
 <main>
     <div class="flexCenter">
-        <div  class="loginUzivMain">
-            <form action="ondra_Exec.php" name="registrationForm"
+        <div class="loginUzivMain">
+            <form action="" name="form"
                   method="post">
                 <p class="uzivZonaNadpis">Uživatelská zóna
                 </p>
@@ -30,12 +30,20 @@
 
                 <input placeholder="Název domény" class="inputText" required type="text" name="fname"><br>
                 <div class="flexCenter">
-                    <input class="inputSubmit" value="ok" type="submit">
+                    <input class="inputSubmit" value="ok" type="submit" name="formSubmit">
                 </div>
             </form>
         </div>
     </div>
 </main>
+<?php
+if (isset($_POST['formSubmit'])) {
+
+    $domainName = $_POST["fname"];
+    echo $domainName;
+    //shell_exec( "command");
+}
+?>
 
 
 </body>
