@@ -39,9 +39,11 @@
 <?php
 if (isset($_POST['formSubmit'])) {
 
-    $domainName = $_POST["fname"];
-    echo $domainName;
-    //shell_exec( "command");
+    if (isset($_POST['fname'])) {
+        $domainName = $_POST["fname"];
+        echo $domainName;
+        //shell_exec( "command");
+    }
 }
 ?>
 
