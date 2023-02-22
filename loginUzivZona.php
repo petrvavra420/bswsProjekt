@@ -43,7 +43,7 @@
             $canLogin = false;
         }
         if (isset($_POST['password'])) {
-            $password = $_POST['password'];
+            $password =  md5($_POST['password']);
         } else {
             $canLogin = false;
         }
