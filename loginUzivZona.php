@@ -68,11 +68,12 @@
                     setcookie("logged_user", $loginFromDB);
                     echo "Přihlášený jako: $_COOKIE[logged_user]";
                     header("Location: uzivZona.php");
+                }else {
+                    echo "<script>alert('Špatné přihlašovací údaje.')</script>";
                 }
             } else {
                 echo "<script>alert('Špatné přihlašovací údaje.')</script>";
             }
-
         } else {
             echo "<script>alert('Špatné přihlašovací údaje.')</script>";
         }
