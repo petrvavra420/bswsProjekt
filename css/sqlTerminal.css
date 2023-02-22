@@ -1,0 +1,41 @@
+.console  {
+    width: 90%;
+    height: 40vh;
+    margin: 1em;
+
+}
+.consoleContent {
+    height: 35vh;
+    background-color: black;
+    color: #77F2A1;
+    overflow-y: auto;
+    padding: 1em;
+}
+.consoleInput {
+    width: 80%;
+    border: none;
+    margin: 0.2em;
+    padding: 0.2em;
+}
+.consoleBtn {
+    width: 20%;
+    background-color: #4F76F6;
+    color: #F9F9F9;
+    margin: 0.2em;
+    padding: 0.2em;
+    border:none;
+    font-family: Verdana;
+    transition: 0.05s;
+
+}
+.consoleBtn:hover {
+    cursor: pointer;
+    border-left: 2px solid #77F2A1;
+    border-right: 2px solid #77F2A1;
+    transition: 0.05s;
+
+}
+.consoleFlex {
+    display: flex;
+    justify-content: center;
+}

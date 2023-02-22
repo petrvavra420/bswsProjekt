@@ -36,7 +36,7 @@
             <div class="prihlaseni-dropdown-content">
                 <a href="loginUzivZona.php">Uživatelská zóna</a>
                 <a href="registrationUzivZona.php">Registrace</a>
-                <a href="#">Správa služeb</a>
+                <a href="loginControlPanel.php">Správa služeb</a>
             </div>
 
         </div>
@@ -45,7 +45,7 @@
             <button class="prihlaseni-dropbtn">Uživatel</button>
             <div class="prihlaseni-dropdown-content">
                 <a href="uzivZona.php">Uživatelská zóna</a>
-                <a href="#">Správa služeb</a>
+                <a href="loginControlPanel.php">Správa služeb</a>
             </div>
         </div>
     <?php endif; ?>
