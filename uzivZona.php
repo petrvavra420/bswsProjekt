@@ -35,11 +35,74 @@
         <button class="tabLinks" onclick="openTab(event, 'serviceList')">Přehled vašich služeb</button>
         <button class="tabLinks" onclick="openTab(event, 'payments')">Platby</button>
         <button class="tabLinks" onclick="openTab(event, 'account')">Účet</button>
-        <button class="tabLinks" id="logoutTab" onclick="logout()">Odhlásit </button>
+        <button class="tabLinks" id="logoutTab" onclick="logout()">Odhlásit</button>
     </aside>
     <div id="orderService" class="tabContent">
         <section>
-            content1
+            <div class="flexCenter">
+                <form action="" name="form"
+                      method="post">
+                    <p class="uzivZonaNadpis">Zvolte název domény
+                    </p>
+
+                    <input placeholder="Název domény" class="inputText" required type="text" name="fname"><br>
+                    <input type="checkbox" name="fdb" checked value="chce!" id="checkbox">
+                    <label for="checkbox">Vytvořit SQL databázi <br></label>
+                    <p class="uzivZonaNadpis">Přihlašovací udaje k doméně
+                    </p>
+                    <input placeholder="Uživ. jméno" class="inputText" required type="text" name="fusername"><br>
+                    <input placeholder="Heslo" class="inputText" required type="password" name="fpassword"><br>
+                    <input placeholder="Potvrďte heslo" class="inputText" required type="password"
+                           name="fpassword2"><br>
+                    <div class="flexCenter">
+                        <input class="inputSubmit" value="ok" type="submit" name="orderFormSubmit">
+                    </div>
+                </form>
+            </div>
+
+            <?php
+            include 'dbcon.php';
+            if (isset($_POST['orderFormSubmit'])) {
+
+                $domainName = $_POST['fname'];
+                $wantDb = isset($_POST['fdb']);
+                $username = $_POST['fusername'];
+                $password = $_POST['fpassword'];
+                $password2 = $_POST['fpassword2'];
+
+                //domain_name check
+                //TODO - dodělat ošetření validní domény
+                mysqli_query($conn, "use projekt");
+                $sql = "SELECT domain_name FROM control_panel_users WHERE login='$domainName'";
+                $result = mysqli_query($conn, $sql);
+
+                if (mysqli_num_rows($result) == 0) {
+
+                }else{
+                    echo "<script>alert('Tato doména je již zabraná!')</script>";
+                    return;
+                }
+
+                //username, password check
+                //TODO - dodělat shodující se hesla check
+                $sql = "SELECT login FROM control_panel_users WHERE login='$username'";
+                $result = mysqli_query($conn, $sql);
+
+                if (mysqli_num_rows($result) == 0) {
+                    $passwordHashed = password_hash($password, PASSWORD_DEFAULT);
+                    $statement = $conn->prepare("insert into control_panel_users(login, password, domain_name) values(?,?,?) ");
+                    $statement->bind_param("sss", $username, $passwordHashed, $domainName);
+                    $statement->execute();
+                    $statement->close();
+                } else {
+                    echo "<script>alert('Toto uživatelské jméno je zabrané!')</script>";
+                    return;
+                }
+
+                shell_exec( ""); //$domain_name, $wantDb
+
+            }
+            ?>
         </section>
     </div>
     <div id="serviceList" class="tabContent">
@@ -78,9 +141,9 @@
         evt.currentTarget.className += " active";
     }
 
-    function logout(){
+    function logout() {
         document.cookie = "is_logged=false";
-        document.location.href='index.php';
+        document.location.href = 'index.php';
 
     }
 
