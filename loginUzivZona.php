@@ -43,7 +43,6 @@
             $canLogin = false;
         }
         if (isset($_POST['password'])) {
-            //$password =  password_hash($_POST['password'], PASSWORD_DEFAULT);
             $password =  $_POST['password'];
         } else {
             $canLogin = false;
