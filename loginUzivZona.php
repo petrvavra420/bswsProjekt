@@ -43,7 +43,6 @@
             $canLogin = false;
         }
         if (isset($_POST['password'])) {
-            //$password =  password_hash($_POST['password'], PASSWORD_DEFAULT);
             $password =  $_POST['password'];
         } else {
             $canLogin = false;
@@ -61,15 +60,15 @@
             $userFoundCount = mysqli_num_rows($result);
 
             if ($userFoundCount == 1) {
-
-                $sql = "SELECT username FROM uz_zona_login WHERE id = $row[id]";
-                $result = mysqli_query($conn,$sql);
-                $rowLogin = mysqli_fetch_array($result,MYSQLI_ASSOC);
-                $loginFromDB = $rowLogin['username'];
-                setcookie("logged_user",$loginFromDB);
-                echo "Přihlášený jako: $_COOKIE[logged_user]";
-                header("Location: uzivZona.php");
-
+                if(password_verify($password, $row['password'])) {
+                    $sql = "SELECT username FROM uz_zona_login WHERE id = $row[id]";
+                    $result = mysqli_query($conn, $sql);
+                    $rowLogin = mysqli_fetch_array($result, MYSQLI_ASSOC);
+                    $loginFromDB = $rowLogin['username'];
+                    setcookie("logged_user", $loginFromDB);
+                    echo "Přihlášený jako: $_COOKIE[logged_user]";
+                    header("Location: uzivZona.php");
+                }
             } else {
                 echo "<script>alert('Špatné přihlašovací údaje.')</script>";
             }
