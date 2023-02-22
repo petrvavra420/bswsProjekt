@@ -8,6 +8,7 @@ $email = $_POST["femail"];
 
 if (!validate($username, $password, $password2, $email)) {
     echo "chyba";
+    return;
 }
 
 
