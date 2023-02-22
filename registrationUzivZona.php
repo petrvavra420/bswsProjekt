@@ -21,7 +21,7 @@
 <main>
     <div class="flexCenter">
         <div  class="loginUzivMain">
-            <form action="/bswsProjekt/registration.php" name="registrationForm"
+            <form action="registration.php" name="registrationForm"
                   method="post">
                 <p class="uzivZonaNadpis">Uživatelská zóna
                 </p>
