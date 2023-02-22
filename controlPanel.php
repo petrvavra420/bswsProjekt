@@ -32,17 +32,56 @@
 </nav>
 <main class="uzivZonaMain">
     <aside>
-        <button>Správa</button>
-        <button onclick="document.location='controlPanelPages/mysql/mysql.php'">MySQL</button>
-        <button>FTP přístup</button>
+        <button onclick="openTab(event, 'manage')" >Správa</button>
+        <button onclick="openTab(event, 'mysql')" id="defaultOpen">MySQL</button>
+        <button onclick="openTab(event, 'serviceList')">FTP přístup</button>
         <button onclick="document.location='logout/controlLogout.php'">Odhlásit</button>
     </aside>
-    <section>
-        content contetnt ncontent conetntn
-    </section>
+    <div id="manage" class="tabContent">
+        <section>
+            content1
+        </section>
+    </div>
+    <div id="mysql" class="tabContent">
+        <section class="flexCenter">
+            <?php
+                include("controlPanelPages/mysql/mysql.php");
+            ?>
+        </section>
+    </div>
+    <div id="serviceList" class="tabContent">
+        <section>
+            content3
+        </section>
+    </div>
+
 
 </main>
 
 
 </body>
 </html>
+
+<script>
+    function openTab(evt, nazevZalozky) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabContent");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tabLinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(nazevZalozky).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+
+    function logout() {
+        document.cookie = "is_logged=false";
+        document.location.href = 'index.php';
+
+    }
+
+    document.getElementById("defaultOpen").click();
+</script>
