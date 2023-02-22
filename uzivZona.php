@@ -39,7 +39,35 @@
     </aside>
     <div id="orderService" class="tabContent">
         <section>
-            content1
+            <div class="flexCenter">
+                    <form action="" name="form"
+                          method="post">
+                        <p class="uzivZonaNadpis">Zvolte název domény
+                        </p>
+
+                        <input placeholder="Název domény" class="inputText" required type="text" name="fname"><br>
+                        <input type="checkbox" name="fdb" checked value="chce!" id="checkbox">
+                        <label for="checkbox">Vytvořit SQL databázi</label>
+                        <div class="flexCenter">
+                            <input class="inputSubmit" value="ok" type="submit" name="orderFormSubmit">
+                        </div>
+                    </form>
+            </div>
+
+            <?php
+            if (isset($_POST['orderFormSubmit'])) {
+
+                if (isset($_POST['fname'])) {
+                    $domainName = $_POST["fname"];
+                    echo $domainName . "\n";
+
+                    if(isset($_POST['fdb'])){
+                        echo $_POST['fdb'];
+                    }
+                    //shell_exec( "command");
+                }
+            }
+            ?>
         </section>
     </div>
     <div id="serviceList" class="tabContent">

@@ -29,6 +29,7 @@
                 </p>
 
                 <input placeholder="Název domény" class="inputText" required type="text" name="fname"><br>
+                <input placeholder="Vytvořit sql databázi" type="checkbox" name="fdb">
                 <div class="flexCenter">
                     <input class="inputSubmit" value="ok" type="submit" name="formSubmit">
                 </div>
@@ -42,6 +43,9 @@ if (isset($_POST['formSubmit'])) {
     if (isset($_POST['fname'])) {
         $domainName = $_POST["fname"];
         echo $domainName;
+        if(isset($_POST['fdb'])){
+            echo $_POST['fdb'];
+        }
         //shell_exec( "command");
     }
 }
