@@ -74,7 +74,6 @@
             } else {
                 echo "<script>alert('Špatné přihlašovací údaje.')</script>";
             }
-
         } else {
             echo "<script>alert('Špatné přihlašovací údaje.')</script>";
         }
