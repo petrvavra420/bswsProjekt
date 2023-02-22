@@ -1,0 +1,59 @@
+.uzivZonaHeader{
+    width: 20%;
+    background-color: #4F76F6;
+    display: inline-block;
+    position: relative;
+
+}
+.uzivZonaHeaderNadpis {
+    background-color: #4F76F6;
+    color: white;
+    font-family: "montserrat-regular";
+    width: 100%;
+    height: 100%;
+    text-transform: uppercase;
+    text-align: center;
+    border: none;
+    font-size: 20px;
+}
+
+.uzivZonaMain{
+    display: flex;
+    height: 100%;
+}
+.uzivZonaMain > aside {
+    background-color: blue;
+    width: 20%;
+    margin: 2em;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(79, 118, 246, 0.1);
+}
+.uzivZonaMain > aside > button {
+    border: none;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    margin-top: 0.2em;
+    margin-bottom: 0.2em;
+    background-color: #4F76F6;
+    font-family: Verdana;
+    color: #F9F9F9;
+    font-size: 1.2em;
+    transition: 0.05s;
+}
+.uzivZonaMain > aside > button:hover {
+    cursor: pointer;
+    border-right: 4px solid #77F2A1;
+    border-left: 4px solid #77F2A1;
+    transition: 0.05s;
+}
+
+.uzivZonaMain > section {
+    background-color: rgba(79, 118, 246, 0.1);
+
+    width: 80%;
+    margin: 2em;
+    height: 80vh;
+
+}

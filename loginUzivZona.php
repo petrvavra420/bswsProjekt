@@ -61,22 +61,21 @@
             $userFoundCount = mysqli_num_rows($result);
 
             if ($userFoundCount == 1) {
-                if(password_verify($password, $row['password'])) {
-                    $sql = "SELECT username FROM uz_zona_login WHERE id = $row[id]";
-                    $result = mysqli_query($conn, $sql);
-                    $rowLogin = mysqli_fetch_array($result, MYSQLI_ASSOC);
-                    $loginFromDB = $rowLogin['username'];
-                    $_SESSION['logged_user'] = $loginFromDB;
-                    echo "Přihlášený jako: $_SESSION[logged_user]";
-                }else{
-                    echo "Špatnej login bro bro";
-                }
+
+                $sql = "SELECT username FROM uz_zona_login WHERE id = $row[id]";
+                $result = mysqli_query($conn,$sql);
+                $rowLogin = mysqli_fetch_array($result,MYSQLI_ASSOC);
+                $loginFromDB = $rowLogin['username'];
+                setcookie("logged_user",$loginFromDB);
+                echo "Přihlášený jako: $_COOKIE[logged_user]";
+                header("Location: uzivZona.php");
+
             } else {
-                echo "Špatnej login bro";
+                echo "<script>alert('Špatné přihlašovací údaje.')</script>";
             }
 
         } else {
-            echo "Špatné přihlašovací údaje.";
+            echo "<script>alert('Špatné přihlašovací údaje.')</script>";
         }
     }
     ?>
