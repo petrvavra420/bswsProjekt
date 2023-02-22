@@ -19,23 +19,23 @@
 
     <div class="divStretch"> Přihlášený uživatel:
         <?php
-        if (isset($_COOKIE['logged_user']))
-            echo $_COOKIE['logged_user'];
+        if (isset($_COOKIE['logged_user_conpanel'])) {
+            echo $_COOKIE['logged_user_conpanel'];
+        }
         ?>
     </div>
     <div class="uzivZonaHeader">
-        <button class="uzivZonaHeaderNadpis">Uživatelská zóna</button>
+        <button class="uzivZonaHeaderNadpis">Ovládací panel</button>
 
     </div>
 
 </nav>
 <main class="uzivZonaMain">
     <aside>
-        <button>Objednat službu</button>
-        <button>Přehled vašich služeb</button>
-        <button>Platby</button>
-        <button>Účet</button>
-        <button>Odhlásit</button>
+        <button>Správa</button>
+        <button onclick="document.location='controlPanelPages/mysql.php'">MySQL</button>
+        <button>FTP přístup</button>
+        <button onclick="document.location='logout/controlLogout.php'">Odhlásit</button>
     </aside>
     <section>
         content contetnt ncontent conetntn
