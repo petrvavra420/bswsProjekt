@@ -66,6 +66,7 @@
                     $rowLogin = mysqli_fetch_array($result, MYSQLI_ASSOC);
                     $loginFromDB = $rowLogin['username'];
                     setcookie("logged_user", $loginFromDB);
+                    setcookie("is_logged", true);
                     echo "Přihlášený jako: $_COOKIE[logged_user]";
                     header("Location: uzivZona.php");
                 }else {
