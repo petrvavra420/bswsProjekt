@@ -27,14 +27,28 @@
         </div>
     </div>
 
-    <div class="prihlaseni-dropdown">
-        <button class="prihlaseni-dropbtn">Přihlášení</button>
-        <div class="prihlaseni-dropdown-content">
-            <a href="loginUzivZona.php">Uživatelská zóna</a>
-            <a href="registrationUzivZona.php">Registrace</a>
-            <a href="#">Správa služeb</a>
+    <?php
+    session_start();
+    if (!isset($_COOKIE['is_logged']) || $_COOKIE['is_logged'] == false) : ?>
+        <div class="prihlaseni-dropdown">
+            <button class="prihlaseni-dropbtn">Přihlášení</button>
+            <div class="prihlaseni-dropdown-content">
+                <a href="loginUzivZona.php">Uživatelská zóna</a>
+                <a href="registrationUzivZona.php">Registrace</a>
+                <a href="#">Správa služeb</a>
+            </div>
         </div>
-    </div>
+    <?php else : ?>
+        <div class="prihlaseni-dropdown">
+            <button class="prihlaseni-dropbtn">Uživatel</button>
+            <div class="prihlaseni-dropdown-content">
+                <a href="uzivZona.php">Uživatelská zóna</a>
+                <a href="#">Správa služeb</a>
+            </div>
+        </div>
+    <?php endif; ?>
+
+
 </nav>
 <main>
     <?php
