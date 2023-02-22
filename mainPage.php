@@ -32,13 +32,14 @@
         <div class="prihlaseni-dropdown-content">
             <a href="loginUzivZona.php">Uživatelská zóna</a>
             <a href="registrationUzivZona.php">Registrace</a>
-            <a href="#">Správa služeb</a>
+            <a href="loginControlPanel.php">Správa služeb</a>
         </div>
     </div>
 </nav>
 <main>
     <?php
         include("dbcon.php");
+        echo "password: ". password_hash("sluzba",PASSWORD_DEFAULT);
     ?>
 </main>
 

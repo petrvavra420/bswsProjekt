@@ -22,10 +22,10 @@
     <div class="flexCenter">
         <div class="loginUzivMain">
             <form method="post" action="">
-                <p class="uzivZonaNadpis">Uživatelská zóna
+                <p class="uzivZonaNadpis">Ovládací panel
                 </p>
 
-                <input name="name" placeholder="Uživ. jméno nebo e-mail" class="inputText" required type="text"><br>
+                <input name="name" placeholder="Uživ. jméno" class="inputText" required type="text"><br>
                 <input name="password" placeholder="Heslo" class="inputText" required type="password"><br>
                 <div class="flexCenter">
                     <input class="inputSubmit" value="Přihlásit" name="loginUzivSubmit" type="submit">
@@ -54,26 +54,27 @@
             include "dbcon.php";
             $sqlUse = "use projekt";
             $sendUse = mysqli_query($conn, $sqlUse);
-            $sql = "SELECT id, password FROM uz_zona_login WHERE (username ='" . $name . "' OR email ='" . $name . "')";
+            $sql = "SELECT id, password FROM control_panel_users WHERE (login ='" . $name . "')";
             $result = mysqli_query($conn, $sql);
             $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
             $userFoundCount = mysqli_num_rows($result);
 
             if ($userFoundCount == 1) {
                 if(password_verify($password, $row['password'])) {
-                    $sql = "SELECT username FROM uz_zona_login WHERE id = $row[id]";
+                    $sql = "SELECT login FROM control_panel_users WHERE id = $row[id]";
                     $result = mysqli_query($conn, $sql);
                     $rowLogin = mysqli_fetch_array($result, MYSQLI_ASSOC);
-                    $loginFromDB = $rowLogin['username'];
-                    setcookie("logged_user", $loginFromDB);
-                    echo "Přihlášený jako: $_COOKIE[logged_user]";
-                    header("Location: uzivZona.php");
+                    $loginFromDB = $rowLogin['login'];
+                    setcookie("logged_user_conpanel", $loginFromDB);
+                    echo "Přihlášený jako: $_COOKIE[logged_user_conpanel]";
+                    header("Location: controlPanel.php");
                 }else {
                     echo "<script>alert('Špatné přihlašovací údaje.')</script>";
                 }
             } else {
                 echo "<script>alert('Špatné přihlašovací údaje.')</script>";
             }
+
         } else {
             echo "<script>alert('Špatné přihlašovací údaje.')</script>";
         }

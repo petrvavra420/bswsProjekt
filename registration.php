@@ -17,11 +17,12 @@ $sql = "SELECT username, email FROM uz_zona_login WHERE username='$username' OR 
 $result = mysqli_query($conn, $sql);
 
 if (mysqli_num_rows($result) == 0) {
-    $password = password_hash($password, PASSWORD_DEFAULT);
+    $passwordHashed = password_hash($password, PASSWORD_DEFAULT);
     $statement = $conn->prepare("insert into uz_zona_login(username, password, email) values(?,?,?) ");
-    $statement->bind_param("sss", $username, $password, $email);
+    $statement->bind_param("sss", $username, $passwordHashed, $email);
     $statement->execute();
     $statement->close();
+    shell_exec(""); //$username, $password nebo $passwordHashed
     header("Location: index.php");
 } else {
     header("Location: registrationUzivZona.php?error=1");
