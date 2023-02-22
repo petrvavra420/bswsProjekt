@@ -33,7 +33,7 @@
 <main class="uzivZonaMain">
     <aside>
         <button>Správa</button>
-        <button onclick="document.location='controlPanelPages/mysql.php'">MySQL</button>
+        <button onclick="document.location='controlPanelPages/mysql/mysql.php'">MySQL</button>
         <button>FTP přístup</button>
         <button onclick="document.location='logout/controlLogout.php'">Odhlásit</button>
     </aside>
