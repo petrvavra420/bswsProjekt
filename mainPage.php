@@ -27,6 +27,7 @@
         </div>
     </div>
 
+
     <?php
     session_start();
     if (!isset($_COOKIE['is_logged']) || $_COOKIE['is_logged'] == false) : ?>
@@ -37,6 +38,7 @@
                 <a href="registrationUzivZona.php">Registrace</a>
                 <a href="#">Správa služeb</a>
             </div>
+
         </div>
     <?php else : ?>
         <div class="prihlaseni-dropdown">
@@ -53,6 +55,7 @@
 <main>
     <?php
         include("dbcon.php");
+        echo "password: ". password_hash("sluzba",PASSWORD_DEFAULT);
     ?>
 </main>
 
