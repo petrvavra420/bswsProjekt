@@ -72,20 +72,26 @@
                 $password2 = $_POST['fpassword2'];
 
                 //domain_name check
-                //TODO - dodělat ošetření validní domény
-                mysqli_query($conn, "use projekt");
-                $sql = "SELECT domain_name FROM control_panel_users WHERE login='$domainName'";
-                $result = mysqli_query($conn, $sql);
+                if (preg_match('/^[a-z]+$/', $domainName) && strlen($domainName) <= 30) {
+                    mysqli_query($conn, "use projekt");
+                    $sql = "SELECT domain_name FROM control_panel_users WHERE login='$domainName'";
+                    $result = mysqli_query($conn, $sql);
+                } else {
+                    echo "<script>alert('Neplatná doména! Zadejte pouze malá písmena bez mezer! Maximálně 30 znaků!')</script>";
+                    return;
+                }
 
-                if (mysqli_num_rows($result) == 0) {
-
-                }else{
+                if (mysqli_num_rows($result) != 0) {
                     echo "<script>alert('Tato doména je již zabraná!')</script>";
                     return;
                 }
 
                 //username, password check
-                //TODO - dodělat shodující se hesla check
+                if ($password != $password2) {
+                    echo "<script>alert('Hesla se neshodují!')</script>";
+                    return false;
+                }
+
                 $sql = "SELECT login FROM control_panel_users WHERE login='$username'";
                 $result = mysqli_query($conn, $sql);
 
@@ -100,7 +106,7 @@
                     return;
                 }
 
-                shell_exec( ""); //$domain_name, $wantDb
+                shell_exec(""); //$domain_name, $wantDb
 
             }
             ?>
