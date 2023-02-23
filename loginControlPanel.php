@@ -35,6 +35,10 @@
     </div>
 
     <?php
+    if (isset($_COOKIE['logged_user_conpanel'])){
+        header("Location: controlPanel.php");
+    }
+
     if (isset($_POST['loginUzivSubmit'])) {
         $canLogin = true;
         if (isset($_POST['name'])) {

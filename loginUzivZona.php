@@ -35,6 +35,10 @@
     </div>
 
     <?php
+    if (isset($_COOKIE['logged_user'])){
+        header("Location: uzivZona.php");
+    }
+
     if (isset($_POST['loginUzivSubmit'])) {
         $canLogin = true;
         if (isset($_POST['name'])) {
