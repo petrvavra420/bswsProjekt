@@ -32,9 +32,9 @@
 </nav>
 <main class="uzivZonaMain">
     <aside>
-        <button onclick="openTab(event, 'manage')" >Správa</button>
+        <button onclick="openTab(event, 'manage')" id="defaultOpen">Správa</button>
         <button onclick="openTab(event, 'mysql')">MySQL</button>
-        <button onclick="openTab(event, 'serviceList')" id="defaultOpen">FTP přístup</button>
+        <button onclick="openTab(event, 'serviceList')" >FTP přístup</button>
         <button onclick="document.location='logout/controlLogout.php'">Odhlásit</button>
     </aside>
     <div id="manage" class="tabContent">
