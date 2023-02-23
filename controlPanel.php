@@ -1,12 +1,51 @@
 <!DOCTYPE html>
 <html>
 <head>
+<?php
+session_start();
+?>
     <title>Webhosting</title>
     <link rel="stylesheet" href="css/mainPage.css">
     <link rel="stylesheet" href="css/loginUzivZona.css">
     <link rel="stylesheet" href="css/uzivZona.css">
+
+    <script>
+    function openTab(nazevZalozky) {
+
+        if (nazevZalozky != null){
+            $.ajax({
+            url: 'set_session_value.php',
+            type: 'POST',
+            data: {what_i_need_to_load: nazevZalozky},
+  });
+     
+        var tabcontent;
+
+        tabcontent = document.getElementsByClassName("tabContent");
+
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+       
+
+        document.getElementById(nazevZalozky).style.display = "block";
+       
+    }
+    }
+
+    function logout() {
+        document.cookie = "is_logged=false";
+        document.location.href = 'index.php';
+        session_abort();
+
+    }
+</script>
+
+
+
 </head>
-<body>
+<body onload="openTab('<?php echo $_SESSION['what_i_need_to_load'];?>')">
+
 
 
 <nav>
@@ -32,9 +71,9 @@
 </nav>
 <main class="uzivZonaMain">
     <aside>
-        <button onclick="openTab(event, 'manage')" >Správa</button>
-        <button onclick="openTab(event, 'mysql')" id="defaultOpen">MySQL</button>
-        <button onclick="openTab(event, 'serviceList')">FTP přístup</button>
+        <button onclick="openTab('manage')">Správa</button>
+        <button onclick="openTab('mysql')">MySQL</button>
+        <button onclick="openTab('fileManager')">FTP přístup</button>
         <button onclick="document.location='logout/controlLogout.php'">Odhlásit</button>
     </aside>
     <div id="manage" class="tabContent">
@@ -49,9 +88,20 @@
             ?>
         </section>
     </div>
-    <div id="serviceList" class="tabContent">
+
+    <div id="fileManager" class="tabContent">
         <section>
-            content3
+            <?php
+            
+            $service_username = $_COOKIE['logged_user_conpanel']; // Potrebuju ziskat uz. jmeno dane sluzby
+            $username =  $_COOKIE['logged_user']; // Potrebuju ziskat uz. jmeno
+
+            define('FM_EMBED', true);
+            define('FM_USER', $username);
+            define('FM_SER_USER', $service_username);
+            include("explorer.php");
+            
+        ?>
         </section>
     </div>
 
@@ -59,29 +109,8 @@
 </main>
 
 
+
 </body>
+
 </html>
 
-<script>
-    function openTab(evt, nazevZalozky) {
-        var i, tabcontent, tablinks;
-        tabcontent = document.getElementsByClassName("tabContent");
-        for (i = 0; i < tabcontent.length; i++) {
-            tabcontent[i].style.display = "none";
-        }
-        tablinks = document.getElementsByClassName("tabLinks");
-        for (i = 0; i < tablinks.length; i++) {
-            tablinks[i].className = tablinks[i].className.replace(" active", "");
-        }
-        document.getElementById(nazevZalozky).style.display = "block";
-        evt.currentTarget.className += " active";
-    }
-
-    function logout() {
-        document.cookie = "is_logged=false";
-        document.location.href = 'index.php';
-
-    }
-
-    document.getElementById("defaultOpen").click();
-</script>
