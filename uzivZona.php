@@ -125,7 +125,7 @@
             mysqli_query($conn, "use projekt");
             $usernameMain = $_COOKIE['logged_user'];
 
-            $sql = "SELECT domain_name FROM `control_panel_users` LEFT JOIN uz_zona_login ON uz_zona_login_id = control_panel_users.uz_zona_login_id WHERE username = '$usernameMain'";
+            $sql = "SELECT domain_name, login FROM `control_panel_users` LEFT JOIN uz_zona_login ON uz_zona_login_id = control_panel_users.uz_zona_login_id WHERE username = '$usernameMain'";
             $result = mysqli_query($conn, $sql);
             ?>
 
@@ -133,15 +133,28 @@
                 <?php foreach ($result as $block): ?>
                     <div class="block">
                         <h2><?php echo $block['domain_name']; ?></h2>
-                        <button>
-                            <a href="controlPanel.php">Otevřít</a>
-                        </button>
-                        <button>
-                            <a href="">Smazat</a></button>
+                        <form method="post" name="deleteForm">
+                            <button>
+                                <a href="controlPanel.php">Otevřít</a>
+                            </button>
+                            <button name="delete" value="<?php echo $block['domain_name']; ?>">
+                                Smazat
+                            </button>
+                        </form>
                     </div>
                 <?php endforeach; ?>
             </div>
 
+            <?php
+                mysqli_query($conn, "use projekt");
+                if(isset($_POST['delete'])){
+                    $domain_name = $_POST['delete'];
+                    $sql = "SELECT login FROM control_panel_users WHERE domain_name = '$domain_name'";
+                    $result = mysqli_query($conn, $sql);
+                    $resultArray = mysqli_fetch_array($result, MYSQLI_ASSOC);
+                    $login = $resultArray['login'];
+                }
+            ?>
         </section>
     </div>
     <div id="payments" class="tabContent">
