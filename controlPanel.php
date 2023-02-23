@@ -51,7 +51,16 @@
     </div>
     <div id="serviceList" class="tabContent">
         <section>
-            content3
+            <?php
+            $service_username = "sluzba"; // Potrebuju ziskat uz. jmeno dane sluzby
+            $username = "admin"; // Potrebuju ziskat uz. jmeno
+
+            define('FM_EMBED', true);
+            define('FM_USER', $username);
+            define('FM_SER_USER', $service_username);
+            include("explorer.php");
+        ?>
+        
         </section>
     </div>
 

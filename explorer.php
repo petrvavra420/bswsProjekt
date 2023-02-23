@@ -1,7 +1,7 @@
 <?php
 //Default Configuration
 $CONFIG = '{"lang":"en","error_reporting":false,"show_hidden":false,"hide_Cols":false,"theme":"dark"}';
-
+$username = "";
 /**
  * H3K | Tiny File Manager V2.5.2
  * @author Prasath Mani | CCP Programmers
@@ -27,8 +27,7 @@ $use_auth = true;
 // Users: array('Username' => 'Password', 'Username2' => 'Password2', ...)
 // Generate secure password hash - https://tinyfilemanager.github.io/docs/pwd.html
 $auth_users = array(
-'ondra' => password_hash('ondra',PASSWORD_DEFAULT),
-    
+    'sluzba' => password_hash('sluzba',PASSWORD_DEFAULT),
 );
 
 // Readonly users
@@ -43,8 +42,7 @@ $global_readonly = false;
 // user specific directories
 // array('Username' => 'Directory path', 'Username2' => 'Directory path', ...)
 $directories_users = array(
-'ondra' => '/srv/Sdileno/http/users/ondra',
-
+    'sluzba' => '/srv/Sdileno/http',
 );
 
 // Enable highlight.js (https://highlightjs.org/) on view's page
@@ -196,6 +194,9 @@ if ($report_errors == true) {
 if (defined('FM_EMBED')) {
     $use_auth = false;
     $sticky_navbar = false;
+    $username = constant('FM_USER');
+    $service_username = constant('FM_SER_USER');
+    $root_path = "/srv/Sdileno/http/users/$username/$service_username";
 } else {
     @set_time_limit(600);
 
