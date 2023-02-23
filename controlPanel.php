@@ -14,7 +14,7 @@ session_start();
 
         if (nazevZalozky != null){
             $.ajax({
-            url: 'set_session_value.php',
+            url: 'controlPanelPages/ftp/set_session_value.php',
             type: 'POST',
             data: {what_i_need_to_load: nazevZalozky},
   });
@@ -92,14 +92,32 @@ session_start();
     <div id="fileManager" class="tabContent">
         <section>
             <?php
-            
-            $service_username = "sluzba"; // Potrebuju ziskat uz. jmeno dane sluzby
-            $username = "admin"; // Potrebuju ziskat uz. jmeno
+            if (isset($_COOKIE['logged_user_conpanel']))
+            {
+                include("dbcon.php");
+                $sqlUse = "use projekt";
+                $sendUse = mysqli_query($conn, $sqlUse);
 
-            define('FM_EMBED', true);
-            define('FM_USER', $username);
-            define('FM_SER_USER', $service_username);
-            include("explorer.php");
+                $service_username = $_COOKIE['logged_user_conpanel']; // Potrebuju ziskat uz. jmeno dane sluzby
+                $sql = "SELECT username FROM control_panel_users LEFT JOIN uz_zona_login ON control_panel_users.uz_zona_login_id = uz_zona_login.id WHERE login =".'"'.$service_username.'"';
+
+                $result = mysqli_query($conn, $sql);
+
+                if (mysqli_num_rows($result) > 0) {
+                    // output data of each row
+                    while($row = mysqli_fetch_assoc($result)) {
+                        $username =  $row["username"];
+                    }
+                }
+
+                define('FM_EMBED', true);
+                define('FM_USER', $username);
+                define('FM_SER_USER', $service_username);
+                include("controlPanelPages/ftp/explorer.php");
+
+            }
+
+
             
         ?>
         </section>

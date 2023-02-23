@@ -93,13 +93,18 @@
                     return false;
                 }
 
+                $sql = "SELECT id FROM uz_zona_login WHERE username='$usernameMain'";
+                $result = mysqli_query($conn, $sql);
+                $resultArray = mysqli_fetch_array($result, MYSQLI_ASSOC);
+                $id = $resultArray['id'];
+
                 $sql = "SELECT login FROM control_panel_users WHERE login='$username'";
                 $result = mysqli_query($conn, $sql);
 
                 if (mysqli_num_rows($result) == 0) {
                     $passwordHashed = password_hash($password, PASSWORD_DEFAULT);
-                    $statement = $conn->prepare("insert into control_panel_users(login, password, domain_name) values(?,?,?) ");
-                    $statement->bind_param("sss", $username, $passwordHashed, $domainName);
+                    $statement = $conn->prepare("insert into control_panel_users(login, password, domain_name, uz_zona_login_id) values(?,?,?,?) ");
+                    $statement->bind_param("ssss", $username, $passwordHashed, $domainName, $id);
                     $statement->execute();
                     $statement->close();
                 } else {
@@ -115,7 +120,41 @@
     </div>
     <div id="serviceList" class="tabContent">
         <section>
-            content2
+            <?php
+            include 'dbcon.php';
+            mysqli_query($conn, "use projekt");
+            $usernameMain = $_COOKIE['logged_user'];
+
+            $sql = "SELECT domain_name, login FROM `control_panel_users` LEFT JOIN uz_zona_login ON uz_zona_login_id = control_panel_users.uz_zona_login_id WHERE username = '$usernameMain'";
+            $result = mysqli_query($conn, $sql);
+            ?>
+
+            <div class="block-container">
+                <?php foreach ($result as $block): ?>
+                    <div class="block">
+                        <h2><?php echo $block['domain_name']; ?></h2>
+                        <form method="post" name="deleteForm">
+                            <button>
+                                <a href="controlPanel.php">Otevřít</a>
+                            </button>
+                            <button name="delete" value="<?php echo $block['domain_name']; ?>">
+                                Smazat
+                            </button>
+                        </form>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+
+            <?php
+                mysqli_query($conn, "use projekt");
+                if(isset($_POST['delete'])){
+                    $domain_name = $_POST['delete'];
+                    $sql = "SELECT login FROM control_panel_users WHERE domain_name = '$domain_name'";
+                    $result = mysqli_query($conn, $sql);
+                    $resultArray = mysqli_fetch_array($result, MYSQLI_ASSOC);
+                    $login = $resultArray['login'];
+                }
+            ?>
         </section>
     </div>
     <div id="payments" class="tabContent">
