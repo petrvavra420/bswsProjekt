@@ -120,7 +120,28 @@
     </div>
     <div id="serviceList" class="tabContent">
         <section>
-            content2
+            <?php
+            include 'dbcon.php';
+            mysqli_query($conn, "use projekt");
+            $usernameMain = $_COOKIE['logged_user'];
+
+            $sql = "SELECT domain_name FROM `control_panel_users` LEFT JOIN uz_zona_login ON uz_zona_login_id = control_panel_users.uz_zona_login_id WHERE username = '$usernameMain'";
+            $result = mysqli_query($conn, $sql);
+            ?>
+
+            <div class="block-container">
+                <?php foreach ($result as $block): ?>
+                    <div class="block">
+                        <h2><?php echo $block['domain_name']; ?></h2>
+                        <button>
+                            <a href="controlPanel.php">Otevřít</a>
+                        </button>
+                        <button>
+                            <a href="">Smazat</a></button>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+
         </section>
     </div>
     <div id="payments" class="tabContent">
