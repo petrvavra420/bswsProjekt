@@ -93,8 +93,8 @@ session_start();
         <section>
             <?php
             
-            $service_username = "sluzba"; // Potrebuju ziskat uz. jmeno dane sluzby
-            $username = "admin"; // Potrebuju ziskat uz. jmeno
+            $service_username = $_COOKIE['logged_user_conpanel']; // Potrebuju ziskat uz. jmeno dane sluzby
+            $username =  $_COOKIE['logged_user']; // Potrebuju ziskat uz. jmeno
 
             define('FM_EMBED', true);
             define('FM_USER', $username);
