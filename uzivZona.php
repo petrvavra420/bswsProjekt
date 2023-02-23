@@ -163,6 +163,10 @@ if (isset($_POST['odhlasitUzivzona'])){
                     $result = mysqli_query($conn, $sql);
                     $resultArray = mysqli_fetch_array($result, MYSQLI_ASSOC);
                     $login = $resultArray['login'];
+
+                    shell_exec("/srv/Sdileno/.scripts/remove_domain.sh $domain_name $usernameMain $login");
+                    $sql = "DELETE FROM control_panel_users WHERE login = '$login'";
+                    $result = mysqli_query($conn, $sql);
                 }
             ?>
         </section>
