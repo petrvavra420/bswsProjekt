@@ -51,9 +51,14 @@
 
 .uzivZonaMain > section {
     background-color: rgba(79, 118, 246, 0.1);
-
     width: 80%;
     margin: 2em;
     height: 80vh;
+}
 
+.uzivZonaMain > .tabContent {
+    background-color: rgba(79, 118, 246, 0.1);
+    width: 80%;
+    margin: 2em;
+    height: 80vh;
 }
