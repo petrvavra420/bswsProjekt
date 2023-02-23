@@ -110,9 +110,15 @@ session_start();
                     }
                 }
 
+                $sql = "SELECT domain_name FROM control_panel_users WHERE login =".'"'.$service_username.'"';
+                $result = mysqli_query($conn, $sql);
+                $resultArray = mysqli_fetch_array($result, MYSQLI_ASSOC);
+
+                $domain_name = $resultArray['domain_name'];
+
                 define('FM_EMBED', true);
                 define('FM_USER', $username);
-                define('FM_SER_USER', $service_username);
+                define('FM_SER_USER', $domain_name);
                 include("controlPanelPages/ftp/explorer.php");
 
             }
