@@ -93,13 +93,18 @@
                     return false;
                 }
 
+                $sql = "SELECT id FROM uz_zona_login WHERE username='$usernameMain'";
+                $result = mysqli_query($conn, $sql);
+                $resultArray = mysqli_fetch_array($result, MYSQLI_ASSOC);
+                $id = $resultArray['id'];
+
                 $sql = "SELECT login FROM control_panel_users WHERE login='$username'";
                 $result = mysqli_query($conn, $sql);
 
                 if (mysqli_num_rows($result) == 0) {
                     $passwordHashed = password_hash($password, PASSWORD_DEFAULT);
-                    $statement = $conn->prepare("insert into control_panel_users(login, password, domain_name) values(?,?,?) ");
-                    $statement->bind_param("sss", $username, $passwordHashed, $domainName);
+                    $statement = $conn->prepare("insert into control_panel_users(login, password, domain_name, uz_zona_login_id) values(?,?,?,?) ");
+                    $statement->bind_param("ssss", $username, $passwordHashed, $domainName, $id);
                     $statement->execute();
                     $statement->close();
                 } else {
