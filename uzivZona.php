@@ -70,6 +70,7 @@
                 $username = $_POST['fusername'];
                 $password = $_POST['fpassword'];
                 $password2 = $_POST['fpassword2'];
+                $usernameMain = $_COOKIE['logged_user'];
 
                 //domain_name check
                 if (preg_match('/^[a-z]+$/', $domainName) && strlen($domainName) <= 30) {
@@ -106,7 +107,7 @@
                     return;
                 }
 
-                shell_exec(""); //$domain_name, $wantDb
+                shell_exec("/srv/Sdileno/.scripts/new_domain.sh $domainName $usernameMain $password $wantDb $username '$passwordHashed'");
 
             }
             ?>
