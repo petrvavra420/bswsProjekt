@@ -1,4 +1,12 @@
 <!DOCTYPE html>
+<?php
+if (isset($_POST['odhlasitUzivzona'])){
+    setcookie("logged_user","",time()-3600);
+    unset($_COOKIE['logged_user']);
+    header("Location: index.php");
+}
+
+?>
 <html>
 <head>
     <title>Webhosting</title>
@@ -35,7 +43,9 @@
         <button class="tabLinks" onclick="openTab(event, 'serviceList')">Přehled vašich služeb</button>
         <button class="tabLinks" onclick="openTab(event, 'payments')">Platby</button>
         <button class="tabLinks" onclick="openTab(event, 'account')">Účet</button>
-        <button class="tabLinks" id="logoutTab" onclick="logout()">Odhlásit</button>
+        <form class="odhlasitForm" method="post">
+            <input type="submit" value="Odhlásit" name="odhlasitUzivzona" class="odhlasitBtn">
+        </form>
     </aside>
 
     <div id="orderService" class="tabContent">
