@@ -33,8 +33,8 @@
 <main class="uzivZonaMain">
     <aside>
         <button onclick="openTab(event, 'manage')" >Správa</button>
-        <button onclick="openTab(event, 'mysql')" id="defaultOpen">MySQL</button>
-        <button onclick="openTab(event, 'serviceList')">FTP přístup</button>
+        <button onclick="openTab(event, 'mysql')">MySQL</button>
+        <button onclick="openTab(event, 'serviceList')" id="defaultOpen">FTP přístup</button>
         <button onclick="document.location='logout/controlLogout.php'">Odhlásit</button>
     </aside>
     <div id="manage" class="tabContent">
@@ -49,6 +49,9 @@
             ?>
         </section>
     </div>
+
+    <!-- TODO kdyz tu je jen tento div 'serviceList', tak vse funguje, ale kdyz tu jsou vsechny a v tomho divu ve filemanageru na neco kliku 
+        cele se to pokazi -->
     <div id="serviceList" class="tabContent">
         <section>
             <?php
@@ -59,6 +62,7 @@
             define('FM_USER', $username);
             define('FM_SER_USER', $service_username);
             include("explorer.php");
+            
         ?>
         
         </section>
