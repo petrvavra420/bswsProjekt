@@ -1,3 +1,6 @@
+<?php
+ob_start();
+?>
 <!DOCTYPE html>
 <?php
 if (isset($_POST['odhlasitUzivzona'])){
@@ -144,8 +147,8 @@ if (isset($_POST['odhlasitUzivzona'])){
                     <div class="block">
                         <h2><?php echo $block['domain_name']; ?></h2>
                         <form method="post" name="deleteForm">
-                            <button>
-                                <a href="controlPanel.php">Otevřít</a>
+                            <button name="gotoUzivZona" value="<?php echo $block['domain_name']; ?>">
+                                Otevřít
                             </button>
                             <button name="delete" value="<?php echo $block['domain_name']; ?>">
                                 Smazat
@@ -164,6 +167,16 @@ if (isset($_POST['odhlasitUzivzona'])){
                     $resultArray = mysqli_fetch_array($result, MYSQLI_ASSOC);
                     $login = $resultArray['login'];
                 }
+                if (isset($_POST['gotoUzivZona'])){
+                    $domain_name = $_POST['gotoUzivZona'];
+                    $sql = "SELECT login FROM control_panel_users WHERE domain_name = '$domain_name'";
+                    $result = mysqli_query($conn, $sql);
+                    $resultArray = mysqli_fetch_array($result, MYSQLI_ASSOC);
+                    $login = $resultArray['login'];
+                    setcookie("logged_user_conpanel", $login);
+                    header("Location: loginControlPanel.php");
+                }
+
             ?>
         </section>
     </div>
@@ -206,3 +219,8 @@ if (isset($_POST['odhlasitUzivzona'])){
 
     document.getElementById("defaultOpen").click();
 </script>
+
+
+<?php
+ob_end_flush();
+?>
