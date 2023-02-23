@@ -1,51 +1,69 @@
 <!DOCTYPE html>
+<?php
+if (isset($_POST['odhlasitConpanel'])){
+    setcookie("logged_user_conpanel","",time()-3600);
+    unset($_COOKIE['logged_user_conpanel']);
+    header("Location: index.php");
+}
+
+ ?>
 <html>
 <head>
-<?php
-session_start();
-?>
+    <?php
+    session_start();
+    ?>
     <title>Webhosting</title>
     <link rel="stylesheet" href="css/mainPage.css">
     <link rel="stylesheet" href="css/loginUzivZona.css">
     <link rel="stylesheet" href="css/uzivZona.css">
 
     <script>
-    function openTab(nazevZalozky) {
+        function openTab(nazevZalozky) {
 
-        if (nazevZalozky != null){
-            $.ajax({
-            url: 'controlPanelPages/ftp/set_session_value.php',
-            type: 'POST',
-            data: {what_i_need_to_load: nazevZalozky},
-  });
-     
-        var tabcontent;
+            if (nazevZalozky != null) {
+                $.ajax({
+                    url: 'controlPanelPages/ftp/set_session_value.php',
+                    type: 'POST',
+                    data: {what_i_need_to_load: nazevZalozky},
+                });
 
-        tabcontent = document.getElementsByClassName("tabContent");
+                var tabcontent;
 
-        for (i = 0; i < tabcontent.length; i++) {
-            tabcontent[i].style.display = "none";
+                tabcontent = document.getElementsByClassName("tabContent");
+
+                for (i = 0; i < tabcontent.length; i++) {
+                    tabcontent[i].style.display = "none";
+                }
+
+
+                document.getElementById(nazevZalozky).style.display = "block";
+
+            }
         }
-       
 
-        document.getElementById(nazevZalozky).style.display = "block";
-       
-    }
-    }
+        /*function logout() {
+            document.cookie = "is_logged=false";
+            document.location.href = 'index.php';
+            session_abort();
 
-    function logout() {
-        document.cookie = "is_logged=false";
-        document.location.href = 'index.php';
-        session_abort();
+        }*/
 
-    }
-</script>
-
+        function logout() {
+            // Call a PHP script using AJAX
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    console.log(this.responseText);
+                }
+            };
+            xhttp.open("GET", "logout/controlLogout.php", true);
+            xhttp.send();
+        }
+    </script>
 
 
 </head>
-<body onload="openTab('<?php echo $_SESSION['what_i_need_to_load'];?>')">
-
+<body onload="openTab('<?php echo $_SESSION['what_i_need_to_load']; ?>')">
 
 
 <nav>
@@ -74,7 +92,11 @@ session_start();
         <button onclick="openTab('manage')">Správa</button>
         <button onclick="openTab('mysql')">MySQL</button>
         <button onclick="openTab('fileManager')">FTP přístup</button>
-        <button onclick="document.location='logout/controlLogout.php'">Odhlásit</button>
+        <form class="odhlasitForm" method="post">
+            <input type="submit" value="Odhlásit" name="odhlasitConpanel" class="odhlasitBtn">
+        </form>
+
+
     </aside>
     <div id="manage" class="tabContent">
         <section>
@@ -84,7 +106,7 @@ session_start();
     <div id="mysql" class="tabContent">
         <section class="flexCenter">
             <?php
-                include("controlPanelPages/mysql/mysql.php");
+            include("controlPanelPages/mysql/mysql.php");
             ?>
         </section>
     </div>
@@ -92,21 +114,20 @@ session_start();
     <div id="fileManager" class="tabContent">
         <section>
             <?php
-            if (isset($_COOKIE['logged_user_conpanel']))
-            {
+            if (isset($_COOKIE['logged_user_conpanel'])) {
                 include("dbcon.php");
                 $sqlUse = "use projekt";
                 $sendUse = mysqli_query($conn, $sqlUse);
 
                 $service_username = $_COOKIE['logged_user_conpanel']; // Potrebuju ziskat uz. jmeno dane sluzby
-                $sql = "SELECT username FROM control_panel_users LEFT JOIN uz_zona_login ON control_panel_users.uz_zona_login_id = uz_zona_login.id WHERE login =".'"'.$service_username.'"';
+                $sql = "SELECT username FROM control_panel_users LEFT JOIN uz_zona_login ON control_panel_users.uz_zona_login_id = uz_zona_login.id WHERE login =" . '"' . $service_username . '"';
 
                 $result = mysqli_query($conn, $sql);
 
                 if (mysqli_num_rows($result) > 0) {
                     // output data of each row
-                    while($row = mysqli_fetch_assoc($result)) {
-                        $username =  $row["username"];
+                    while ($row = mysqli_fetch_assoc($result)) {
+                        $username = $row["username"];
                     }
                 }
 
@@ -124,8 +145,7 @@ session_start();
             }
 
 
-            
-        ?>
+            ?>
         </section>
     </div>
 
@@ -133,8 +153,11 @@ session_start();
 </main>
 
 
-
 </body>
 
 </html>
 
+<script>
+
+
+</script>
