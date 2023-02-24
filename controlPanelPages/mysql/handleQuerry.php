@@ -3,9 +3,26 @@ if (isset($_POST['sql'])) {
     include_once("../../dbcon.php");
     $sqlUse = "use projekt";
     $sendUse = mysqli_query($conn, $sqlUse);
+    $sqlGetCreds = "SELECT database_users.login,database_users.password,database_name FROM database_users LEFT JOIN control_panel_users ON database_users.id_control_panel_user = control_panel_users.id WHERE control_panel_users.login = '$_COOKIE[logged_user_conpanel]'";
+    $result = mysqli_query($conn,$sqlGetCreds);
+    $row = mysqli_fetch_assoc($result);
+
+
+    $servername = "10.0.10.4:3306";
+    $usernameDBUser = $row['login'];
+    $passwordDBUser = $row['password'];
+    $databaseNameUser = $row['database_name'];
+
+// Create connection
+    $connUser = mysqli_connect($servername, $usernameDBUser, $passwordDBUser);
+    $sqlUse = "use ".$databaseNameUser;
+    $sendUse = mysqli_query($connUser, $sqlUse);
+
+
+
 
     $sql = $_POST['sql'];
-    $result = mysqli_query($conn, $sql);
+    $result = mysqli_query($connUser, $sql);
 
     if (is_array($sql)) $sql = key($sql);
 
@@ -15,7 +32,6 @@ if (isset($_POST['sql'])) {
     $type = strtoupper(preg_replace('/\s++/', ' ', $matches[1]));
     if ($type === 'BEGIN') $type = 'START TRANSACTION';
 
-    echo $type;
 
     if ($type == "SELECT") {
 
@@ -52,24 +68,24 @@ if (isset($_POST['sql'])) {
     }
 
     if (!$result) {
-        die('Invalid query: ' . mysqli_error($conn));
+        die('Invalid query: ' . mysqli_error($connUser));
     } else {
 
         switch ($type) {
             case "DELETE":
-                echo  mysqli_affected_rows($conn)." rows deleted.";
+                echo  mysqli_affected_rows($connUser)." rows deleted.";
                 break;
             case "INSERT":
-                echo  mysqli_affected_rows($conn)." rows inserted.";
+                echo  mysqli_affected_rows($connUser)." rows inserted.";
                 break;
             case "UPDATE":
-                echo  mysqli_affected_rows($conn)." rows updated.";
+                echo  mysqli_affected_rows($connUser)." rows updated.";
                 break;
             case "SELECTED":
-                echo mysqli_affected_rows($conn) . " rows selected.";
+                echo mysqli_affected_rows($connUser) . " rows selected.";
                 break;
             default:
-                echo  mysqli_affected_rows($conn)." rows affected, querry completed succesfully.";
+                echo  mysqli_affected_rows($connUser)." rows affected, querry completed succesfully.";
         }
 
     }
