@@ -131,7 +131,7 @@ if (isset($_POST['odhlasitUzivzona'])){
                     $id = $resultArray['id'];
 
                     $statement = $conn->prepare("insert into database_users(login, password, database_name, id_control_panel_user) values(?,?,?,?) ");
-                    $statement->bind_param("ssss", $username, $passwordHashed, $domainName, $id);
+                    $statement->bind_param("ssss", $username, $password, $domainName, $id);
                     $statement->execute();
                     $statement->close();
                 }
