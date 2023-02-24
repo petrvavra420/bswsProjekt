@@ -24,6 +24,11 @@ if (isset($_POST['sql'])) {
     $sql = $_POST['sql'];
     $result = mysqli_query($connUser, $sql);
 
+    if (!$result) {
+        echo "Invalid SQL query!";
+        die();
+    }
+
     if (is_array($sql)) $sql = key($sql);
 
     $matches = null;
@@ -37,6 +42,7 @@ if (isset($_POST['sql'])) {
 
         // Check if the query was successful.
         if (!$result) {
+
             die('Invalid query: ' . mysqli_error($conn));
         }
 
