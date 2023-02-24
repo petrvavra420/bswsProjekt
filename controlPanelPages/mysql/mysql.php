@@ -26,7 +26,7 @@ include_once("dbcon.php");
         console.log(text);
         $.ajax({
             url: 'controlPanelPages/mysql/handleQuerry.php',
-            type: 'post',
+            type: 'POST',
             data: {sql: text},
             success: function (response) {
                 var paraResponse = document.createElement("p");
@@ -35,8 +35,15 @@ include_once("dbcon.php");
                 console.log("odpoved: " + response);
                 var elem = document.getElementById('consoleContent');
                 elem.scrollTop = elem.scrollHeight;
+            },
+            error: function(){
+                var paraResponse = document.createElement("p");
+                var response = "Invalid SQL query, check your syntax!";
+                paraResponse.innerHTML = response;
+                cons.append(paraResponse);
             }
         });
+
 
 
     }
