@@ -38,7 +38,7 @@ if (isset($_POST['sql'])) {
     if ($type === 'BEGIN') $type = 'START TRANSACTION';
 
 
-    if ($type == "SELECT") {
+    if ($type == "SELECT" || $type == "DESC") {
 
         // Check if the query was successful.
         if (!$result) {
