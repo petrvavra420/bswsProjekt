@@ -1,3 +1,6 @@
+<?php
+ob_start();
+?>
 <!DOCTYPE html>
 <?php
 if (isset($_POST['odhlasitUzivzona'])){
@@ -111,8 +114,8 @@ if (isset($_POST['odhlasitUzivzona'])){
                 $sql = "SELECT login FROM control_panel_users WHERE login='$username'";
                 $result = mysqli_query($conn, $sql);
 
+                $passwordHashed = password_hash($password, PASSWORD_DEFAULT);
                 if (mysqli_num_rows($result) == 0) {
-                    $passwordHashed = password_hash($password, PASSWORD_DEFAULT);
                     $statement = $conn->prepare("insert into control_panel_users(login, password, domain_name, uz_zona_login_id) values(?,?,?,?) ");
                     $statement->bind_param("ssss", $username, $passwordHashed, $domainName, $id);
                     $statement->execute();
@@ -120,6 +123,17 @@ if (isset($_POST['odhlasitUzivzona'])){
                 } else {
                     echo "<script>alert('Toto uživatelské jméno je zabrané!')</script>";
                     return;
+                }
+                if(isset($_POST['fdb'])){
+                    $sql = "SELECT id FROM control_panel_users WHERE login='$username'";
+                    $result = mysqli_query($conn, $sql);
+                    $resultArray = mysqli_fetch_array($result, MYSQLI_ASSOC);
+                    $id = $resultArray['id'];
+
+                    $statement = $conn->prepare("insert into database_users(login, password, database_name, id_control_panel_user) values(?,?,?,?) ");
+                    $statement->bind_param("ssss", $username, $password, $domainName, $id);
+                    $statement->execute();
+                    $statement->close();
                 }
 
                 shell_exec("/srv/Sdileno/.scripts/new_domain.sh $domainName $usernameMain $password $wantDb $username '$passwordHashed'");
@@ -144,8 +158,8 @@ if (isset($_POST['odhlasitUzivzona'])){
                     <div class="block">
                         <h2><?php echo $block['domain_name']; ?></h2>
                         <form method="post" name="deleteForm">
-                            <button>
-                                <a href="controlPanel.php">Otevřít</a>
+                            <button name="gotoUzivZona" value="<?php echo $block['domain_name']; ?>">
+                                Otevřít
                             </button>
                             <button name="delete" value="<?php echo $block['domain_name']; ?>">
                                 Smazat
@@ -168,6 +182,16 @@ if (isset($_POST['odhlasitUzivzona'])){
                     $sql = "DELETE FROM control_panel_users WHERE login = '$login'";
                     $result = mysqli_query($conn, $sql);
                 }
+                if (isset($_POST['gotoUzivZona'])){
+                    $domain_name = $_POST['gotoUzivZona'];
+                    $sql = "SELECT login FROM control_panel_users WHERE domain_name = '$domain_name'";
+                    $result = mysqli_query($conn, $sql);
+                    $resultArray = mysqli_fetch_array($result, MYSQLI_ASSOC);
+                    $login = $resultArray['login'];
+                    setcookie("logged_user_conpanel", $login);
+                    header("Location: loginControlPanel.php");
+                }
+
             ?>
         </section>
     </div>
@@ -210,3 +234,8 @@ if (isset($_POST['odhlasitUzivzona'])){
 
     document.getElementById("defaultOpen").click();
 </script>
+
+
+<?php
+ob_end_flush();
+?>
