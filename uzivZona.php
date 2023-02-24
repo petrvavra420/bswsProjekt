@@ -114,8 +114,8 @@ if (isset($_POST['odhlasitUzivzona'])){
                 $sql = "SELECT login FROM control_panel_users WHERE login='$username'";
                 $result = mysqli_query($conn, $sql);
 
+                $passwordHashed = password_hash($password, PASSWORD_DEFAULT);
                 if (mysqli_num_rows($result) == 0) {
-                    $passwordHashed = password_hash($password, PASSWORD_DEFAULT);
                     $statement = $conn->prepare("insert into control_panel_users(login, password, domain_name, uz_zona_login_id) values(?,?,?,?) ");
                     $statement->bind_param("ssss", $username, $passwordHashed, $domainName, $id);
                     $statement->execute();
@@ -123,6 +123,17 @@ if (isset($_POST['odhlasitUzivzona'])){
                 } else {
                     echo "<script>alert('Toto uživatelské jméno je zabrané!')</script>";
                     return;
+                }
+                if(isset($_POST['fdb'])){
+                    $sql = "SELECT id FROM control_panel_users WHERE login='$username'";
+                    $result = mysqli_query($conn, $sql);
+                    $resultArray = mysqli_fetch_array($result, MYSQLI_ASSOC);
+                    $id = $resultArray['id'];
+
+                    $statement = $conn->prepare("insert into database_users(login, password, database_name, id_control_panel_user) values(?,?,?,?) ");
+                    $statement->bind_param("ssss", $username, $passwordHashed, $domainName, $id);
+                    $statement->execute();
+                    $statement->close();
                 }
 
                 shell_exec("/srv/Sdileno/.scripts/new_domain.sh $domainName $usernameMain $password $wantDb $username '$passwordHashed'");
