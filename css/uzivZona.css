@@ -98,3 +98,7 @@
 .form {
     width: 100%;
 }
+
+#inputOrder {
+    margin: 0.4em;
+}
