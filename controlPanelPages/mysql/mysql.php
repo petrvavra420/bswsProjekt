@@ -37,10 +37,10 @@ include_once("dbcon.php");
                 elem.scrollTop = elem.scrollHeight;
             },
             error: function(){
-                var paraResponse = document.createElement("p");
+                var paraResponse1 = document.createElement("p");
                 var response = "Invalid SQL query, check your syntax!";
-                paraResponse.innerHTML = response;
-                cons.append(paraResponse);
+                paraResponse1.innerHTML = response;
+                cons.append(paraResponse1);
             }
         });
 
