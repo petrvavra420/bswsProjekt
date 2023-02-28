@@ -1,16 +1,21 @@
 <!DOCTYPE html>
 <?php
-if (isset($_POST['odhlasitConpanel'])){
-    setcookie("logged_user_conpanel","",time()-3600);
+if (isset($_POST['odhlasitConpanel'])) {
+    setcookie("logged_user_conpanel", "", time() - 3600);
     unset($_COOKIE['logged_user_conpanel']);
     header("Location: index.php");
 }
 
- ?>
+
+?>
 <html>
 <head>
     <?php
     session_start();
+    if (!isset($_SESSION['what_i_need_to_load'])) {
+        $_SESSION['what_i_need_to_load'] = "manage";
+
+    }
     ?>
     <title>Webhosting</title>
     <link rel="stylesheet" href="css/mainPage.css">
@@ -131,7 +136,7 @@ if (isset($_POST['odhlasitConpanel'])){
                     }
                 }
 
-                $sql = "SELECT domain_name FROM control_panel_users WHERE login =".'"'.$service_username.'"';
+                $sql = "SELECT domain_name FROM control_panel_users WHERE login =" . '"' . $service_username . '"';
                 $result = mysqli_query($conn, $sql);
                 $resultArray = mysqli_fetch_array($result, MYSQLI_ASSOC);
 
