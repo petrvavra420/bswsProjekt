@@ -145,7 +145,7 @@ if (isset($_POST['odhlasitUzivzona'])){
             <div class="block-container">
                 <?php foreach ($result as $block): ?>
                     <div class="block">
-                        <h2><?php echo $block['domain_name']; ?></h2>
+                        <h2><?php echo $block['domain_name'].".skola.pokus"; ?></h2>
                         <form method="post" name="deleteForm">
                             <button name="gotoUzivZona" value="<?php echo $block['domain_name']; ?>">
                                 Otevřít
