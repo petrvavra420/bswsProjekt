@@ -6,25 +6,31 @@
 .loginUzivMain{
     background-color: #1F2B37;
     margin-top: 2em;
-    width: 40%;
+    width: 30em;
+    min-height: 40vh;
     display: flex;
     justify-content: center;
 }
 .uzivZonaNadpis{
     text-align: center;
     font-size: 1.2em;
-    font-family: Verdana;
+    font-family: montserrat-regular;
     color: #4F76F6;
+    margin-bottom: 3em;
+    text-transform: uppercase;
+    scale: 1.2;
 }
 .uzivZonaPopis {
     color: white;
     font-family: "montserrat-regular";
     text-align: center;
+
 }
 
 .inputText{
     border: none;
     margin: 0.2em;
+    margin-bottom: 2em;
     padding-bottom: 0.6em;
     padding-top: 0.6em;
     padding-left: 1em;
@@ -33,6 +39,7 @@
     border-bottom: 3px solid  #77F2A1;
     color: white;
     font-family: "montserrat-regular";
+    scale: 1.2;
 }
 
 .inputSubmit{
@@ -46,14 +53,19 @@
     background-color: #4F76F6;
     color: white;
     border: none;
-    transition: 0.2s;
+    transition: 0.1s;
+    border-radius: 1em;
+    scale: 1.2;
+
 }
 
 .inputSubmit:hover{
     cursor: pointer;
     padding-right: 2.2em;
     padding-left: 2.2em;
-    transition: 0.2s;
+    transition: 0.1s;
+    background-color: #1c2429;
+    color: #77F2A1;
 }
 
 .inputText:focus {
