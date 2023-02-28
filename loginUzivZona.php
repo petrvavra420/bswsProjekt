@@ -4,6 +4,7 @@
     <title>Webhosting</title>
     <link rel="stylesheet" href="css/mainPage.css">
     <link rel="stylesheet" href="css/loginUzivZona.css">
+    <link rel="stylesheet" href="css/loader.css">
 </head>
 <body>
 
@@ -25,17 +26,18 @@
                 <p class="uzivZonaNadpis">Uživatelská zóna
                 </p>
 
-                <input name="name" placeholder="Uživ. jméno nebo e-mail" class="inputText" required type="text"><br>
-                <input name="password" placeholder="Heslo" class="inputText" required type="password"><br>
+                <input name="name" placeholder="Uživ. jméno nebo e-mail" class="inputText"  type="text"><br>
+                <input name="password" placeholder="Heslo" class="inputText" type="password"><br>
                 <div class="flexCenter">
-                    <input class="inputSubmit" value="Přihlásit" name="loginUzivSubmit" type="submit">
+                    <input onclick="showLoader()" class="inputSubmit" value="Přihlásit" name="loginUzivSubmit"
+                           type="submit">
                 </div>
             </form>
         </div>
     </div>
 
     <?php
-    if (isset($_COOKIE['logged_user'])){
+    if (isset($_COOKIE['logged_user'])) {
         header("Location: uzivZona.php");
     }
 
@@ -47,7 +49,7 @@
             $canLogin = false;
         }
         if (isset($_POST['password'])) {
-            $password =  $_POST['password'];
+            $password = $_POST['password'];
         } else {
             $canLogin = false;
         }
@@ -64,7 +66,7 @@
             $userFoundCount = mysqli_num_rows($result);
 
             if ($userFoundCount == 1) {
-                if(password_verify($password, $row['password'])) {
+                if (password_verify($password, $row['password'])) {
                     $sql = "SELECT username FROM uz_zona_login WHERE id = $row[id]";
                     $result = mysqli_query($conn, $sql);
                     $rowLogin = mysqli_fetch_array($result, MYSQLI_ASSOC);
@@ -73,7 +75,7 @@
                     setcookie("is_logged", true);
                     echo "Přihlášený jako: $_COOKIE[logged_user]";
                     header("Location: uzivZona.php");
-                }else {
+                } else {
                     echo "<script>alert('Špatné přihlašovací údaje.')</script>";
                 }
             } else {
@@ -84,8 +86,27 @@
         }
     }
     ?>
+
+    <div class="backgroundCoverLoading" id="backgroundCoverLoading"></div>
+    <div id="loader" class="loadingspinner">
+        <div id="square1"></div>
+        <div id="square2"></div>
+        <div id="square3"></div>
+        <div id="square4"></div>
+        <div id="square5"></div>
+    </div>
 </main>
 
 
 </body>
 </html>
+
+<script>
+    //loader
+    function showLoader() {
+        document.getElementById("loader").style.display = "block";
+        document.getElementById("backgroundCoverLoading").style.display = "block";
+
+    }
+
+</script>
