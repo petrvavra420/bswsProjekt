@@ -64,6 +64,10 @@ if (isset($_POST['odhlasitConpanel'])) {
             xhttp.open("GET", "logout/controlLogout.php", true);
             xhttp.send();
         }
+
+        function openPhpMyAdmin() {
+            location.href = "http://10.0.10.4/phpmyadmin/";
+        }
     </script>
 
 
@@ -79,12 +83,13 @@ if (isset($_POST['odhlasitConpanel'])) {
         </a>
     </div>
 
-    <div class="divStretch"> Přihlášený uživatel:
-        <?php
-        if (isset($_COOKIE['logged_user_conpanel'])) {
-            echo $_COOKIE['logged_user_conpanel'];
-        }
-        ?>
+    <div class="divStretch">
+        <!-- Přihlášený uživatel:
+         --><?php
+        /*        if (isset($_COOKIE['logged_user_conpanel'])) {
+                    echo $_COOKIE['logged_user_conpanel'];
+                }
+                */ ?>
     </div>
     <div class="uzivZonaHeader">
         <button class="uzivZonaHeaderNadpis">Ovládací panel</button>
@@ -95,7 +100,8 @@ if (isset($_POST['odhlasitConpanel'])) {
 <main class="uzivZonaMain">
     <aside>
         <button onclick="openTab('manage')">Správa</button>
-        <button onclick="openTab('mysql')">MySQL</button>
+        <button onclick="openTab('mysql')">MySQL terminál</button>
+        <button onclick="openPhpMyAdmin()">PhpMyAdmin</button>
         <button onclick="openTab('fileManager')">FTP přístup</button>
         <form class="odhlasitForm" method="post">
             <input type="submit" value="Odhlásit" name="odhlasitConpanel" class="odhlasitBtn">
@@ -105,7 +111,29 @@ if (isset($_POST['odhlasitConpanel'])) {
     </aside>
     <div id="manage" class="tabContent">
         <section>
-            content1
+            <span>Přihlášený jako: <?php echo $_COOKIE['logged_user_conpanel'] ?></span>
+            <a>
+                <button>
+                    Změnit heslo Control panel
+                </button>
+            </a>
+            <br>
+            <span>FTP login: <?php echo $_COOKIE['logged_user_conpanel'] ?></span>
+            <a>
+                <button>
+                    Změnit heslo FTP
+                </button>
+            </a>
+            <br>
+            <span>PhpMyAdmin login: <?php echo $_COOKIE['logged_user_conpanel'] ?></span>
+            <a>
+                <button>
+                    Změnit heslo PhpMyAdmin
+                </button>
+            </a>
+
+
+
         </section>
     </div>
     <div id="mysql" class="tabContent">
