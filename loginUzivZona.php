@@ -29,6 +29,7 @@
                 <input name="name" placeholder="Uživ. jméno nebo e-mail" class="inputText"  type="text"><br>
                 <input name="password" placeholder="Heslo" class="inputText" type="password"><br>
                 <div class="flexCenter">
+
                     <input onclick="showLoader()" class="inputSubmit" value="Přihlásit" name="loginUzivSubmit"
                            type="submit">
                 </div>
