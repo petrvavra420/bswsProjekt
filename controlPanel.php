@@ -126,24 +126,25 @@ if (!isset($_COOKIE['logged_user_conpanel'])) {
     </aside>
     <div id="manage" class="tabContent">
         <section>
-            <span>Přihlášený jako: <?php echo $_COOKIE['logged_user_conpanel'] ?></span>
+            <span class="manageHeader">Přihlašovací jméno do všech služeb je stejné jako do ovládacího panelu.</span><br>
+            <span class="manageDesc">Přihlášený uživatel: &nbsp;
+            <span class="manageDescUser"><?php echo $_COOKIE['logged_user_conpanel'] ?></span>
+                </span>
 
             <form class="passwordChangeConpanelForm" method="post">
-                <input type="submit" value="Změnit heslo CONPANEL" name="passChangeConpanel" class="odhlasitBtn">
+                <input type="submit" value="Změnit heslo CONPANEL" name="passChangeConpanel" class="zmenaHeslaBtn">
             </form>
             <br>
 
-            <span>FTP login: <?php echo $_COOKIE['logged_user_conpanel'] ?></span>
 
             <form action="changePasswordForms/ftpChangePass.php" class="passwordChangeConpanelForm" method="post">
-                <input type="submit" value="Změnit heslo FTP" name="passChangeFTP" class="odhlasitBtn">
+                <input type="submit" value="Změnit heslo FTP" name="passChangeFTP" class="zmenaHeslaBtn">
             </form>
             <br>
 
-            <span>PhpMyAdmin login: <?php echo $_COOKIE['logged_user_conpanel'] ?></span>
 
             <form action="changePasswordForms/dbChangePass.php" class="passwordChangeConpanelForm" method="post">
-                <input type="submit" value="Změnit heslo PhpMyAdmin" name="passChangeDB" class="odhlasitBtn">
+                <input type="submit" value="Změnit heslo PhpMyAdmin" name="passChangeDB" class="zmenaHeslaBtn">
             </form>
 
 

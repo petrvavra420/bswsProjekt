@@ -88,7 +88,7 @@ if (isset($_POST['inputPassChangeConpanel'])) {
                 */ ?>
     </div>
     <div class="uzivZonaHeader">
-        <button class="uzivZonaHeaderNadpis"></button>
+        <button class="uzivZonaHeaderNadpis">ZMĚNA HESLA OVLÁDACÍ PANEL</button>
 
     </div>
 
