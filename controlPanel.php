@@ -7,11 +7,11 @@ if (isset($_POST['odhlasitConpanel'])) {
 
 }
 
-if (isset($_POST["passChangeConpanel"])){
+if (isset($_POST["passChangeConpanel"])) {
     header("Location: changePasswordForms/conpanelChangePass.php");
 }
 
-if (!isset($_COOKIE['logged_user_conpanel'])){
+if (!isset($_COOKIE['logged_user_conpanel'])) {
     header("Location: loginControlPanel.php");
 }
 
@@ -76,10 +76,11 @@ if (!isset($_COOKIE['logged_user_conpanel'])){
         function openPhpMyAdmin() {
             location.href = "http://10.0.10.4/phpmyadmin/";
         }
+
         function openUserPanel() {
             location.href = "https://skola.pokus/loginUzivZona.php";
         }
-        
+
 
     </script>
 
@@ -126,26 +127,24 @@ if (!isset($_COOKIE['logged_user_conpanel'])){
     <div id="manage" class="tabContent">
         <section>
             <span>Přihlášený jako: <?php echo $_COOKIE['logged_user_conpanel'] ?></span>
-            <a>
-                <form class="passwordChangeConpanelForm" method="post">
-                    <input type="submit" value="Změnit heslo CONPANEL" name="passChangeConpanel" class="odhlasitBtn">
-                </form>
-            </a>
-            <br>
-            <span>FTP login: <?php echo $_COOKIE['logged_user_conpanel'] ?></span>
-            <a>
-                <button>
-                    Změnit heslo FTP
-                </button>
-            </a>
-            <br>
-            <span>PhpMyAdmin login: <?php echo $_COOKIE['logged_user_conpanel'] ?></span>
-            <a>
-                <button>
-                    Změnit heslo PhpMyAdmin
-                </button>
-            </a>
 
+            <form class="passwordChangeConpanelForm" method="post">
+                <input type="submit" value="Změnit heslo CONPANEL" name="passChangeConpanel" class="odhlasitBtn">
+            </form>
+            <br>
+
+            <span>FTP login: <?php echo $_COOKIE['logged_user_conpanel'] ?></span>
+
+            <form action="changePasswordForms/ftpChangePass.php" class="passwordChangeConpanelForm" method="post">
+                <input type="submit" value="Změnit heslo FTP" name="passChangeFTP" class="odhlasitBtn">
+            </form>
+            <br>
+
+            <span>PhpMyAdmin login: <?php echo $_COOKIE['logged_user_conpanel'] ?></span>
+
+            <form action="changePasswordForms/dbChangePass.php" class="passwordChangeConpanelForm" method="post">
+                <input type="submit" value="Změnit heslo PhpMyAdmin" name="passChangeDB" class="odhlasitBtn">
+            </form>
 
 
         </section>
