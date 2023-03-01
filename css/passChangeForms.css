@@ -1,0 +1,63 @@
+.passChangeConpanelContent {
+    width: 20em;
+    margin-top: 2em;
+    background-color: #1c2429;
+}
+.passChangeConpanelForm > h4{
+    display: flex;
+    justify-content: center;
+    font-family: montserrat-regular;
+    font-size: 0.8em;
+    margin-bottom: 0.5em;
+
+}
+
+.inputTextPass {
+    border: none;
+    padding-left: 1em;
+    padding-right: 1em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    background-color: #1F2B39;
+    border-bottom: 3px solid #77F2A1;
+    color: #F9F9F9;
+    transition: 0.1s;
+    margin-bottom: 1em;
+}
+.inputTextPass:focus{
+    outline: none;
+    padding-left: 1.7em;
+    padding-right: 1.7em;
+    transition: 0.1s;
+
+}
+
+.inputSubmitPass{
+    padding-right: 2em;
+    padding-left: 2em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    margin-bottom: 2em;
+    margin-top: 2em;
+    background-color: #4F76F6;
+    border: none;
+    border-radius: 1em;
+    font-family: montserrat-regular;
+    color: #F9F9F9;
+    transition: 0.1s;
+    font-size: 1em;
+}
+
+.inputSubmitPass:hover {
+    background-color: #77F2A1;
+    color: #1c2429;
+    transition: 0.1s;
+    padding-right: 2.2em;
+    padding-left: 2.2em;
+    cursor: pointer;
+}
+
+#passErrorMsg{
+    color: red;
+    font-family: montserrat-regular;
+}

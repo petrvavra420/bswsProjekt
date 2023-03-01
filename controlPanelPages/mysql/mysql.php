@@ -43,10 +43,11 @@ include_once("dbcon.php");
                 console.log("odpoved: " + response);
                 var elem = document.getElementById('consoleContent');
                 elem.scrollTop = elem.scrollHeight;
+                inputText.value = "";
             },
             error: function(){
                 var paraResponse1 = document.createElement("p");
-                var response = "Špatný SQL požadavek, zkotroluj dotaz.";
+                var response = "Špatný SQL požadavek, zkontroluj dotaz.";
                 paraResponse1.innerHTML = response;
                 cons.append(paraResponse1);
             }

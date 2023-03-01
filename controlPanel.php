@@ -4,8 +4,16 @@ if (isset($_POST['odhlasitConpanel'])) {
     setcookie("logged_user_conpanel", "", time() - 3600);
     unset($_COOKIE['logged_user_conpanel']);
     header("Location: index.php");
+
 }
 
+if (isset($_POST["passChangeConpanel"])) {
+    header("Location: changePasswordForms/conpanelChangePass.php");
+}
+
+if (!isset($_COOKIE['logged_user_conpanel'])) {
+    header("Location: loginControlPanel.php");
+}
 
 ?>
 <html>
@@ -68,6 +76,12 @@ if (isset($_POST['odhlasitConpanel'])) {
         function openPhpMyAdmin() {
             location.href = "http://10.0.10.4/phpmyadmin/";
         }
+
+        function openUserPanel() {
+            location.href = "https://skola.pokus/loginUzivZona.php";
+        }
+
+
     </script>
 
 
@@ -102,6 +116,7 @@ if (isset($_POST['odhlasitConpanel'])) {
         <button onclick="openTab('manage')">Správa</button>
         <button onclick="openTab('mysql')">MySQL terminál</button>
         <button onclick="openPhpMyAdmin()">PhpMyAdmin</button>
+        <button onclick="openUserPanel()">Uživatelská zóna</button>
         <button onclick="openTab('fileManager')">FTP přístup</button>
         <form class="odhlasitForm" method="post">
             <input type="submit" value="Odhlásit" name="odhlasitConpanel" class="odhlasitBtn">
@@ -111,27 +126,26 @@ if (isset($_POST['odhlasitConpanel'])) {
     </aside>
     <div id="manage" class="tabContent">
         <section>
-            <span>Přihlášený jako: <?php echo $_COOKIE['logged_user_conpanel'] ?></span>
-            <a>
-                <button>
-                    Změnit heslo Control panel
-                </button>
-            </a>
-            <br>
-            <span>FTP login: <?php echo $_COOKIE['logged_user_conpanel'] ?></span>
-            <a>
-                <button>
-                    Změnit heslo FTP
-                </button>
-            </a>
-            <br>
-            <span>PhpMyAdmin login: <?php echo $_COOKIE['logged_user_conpanel'] ?></span>
-            <a>
-                <button>
-                    Změnit heslo PhpMyAdmin
-                </button>
-            </a>
+            <span class="manageHeader">Přihlašovací jméno do všech služeb je stejné jako do ovládacího panelu.</span><br>
+            <span class="manageDesc">Přihlášený uživatel: &nbsp;
+            <span class="manageDescUser"><?php echo $_COOKIE['logged_user_conpanel'] ?></span>
+                </span>
 
+            <form class="passwordChangeConpanelForm" method="post">
+                <input type="submit" value="Změnit heslo CONPANEL" name="passChangeConpanel" class="zmenaHeslaBtn">
+            </form>
+            <br>
+
+
+            <form action="changePasswordForms/ftpChangePass.php" class="passwordChangeConpanelForm" method="post">
+                <input type="submit" value="Změnit heslo FTP" name="passChangeFTP" class="zmenaHeslaBtn">
+            </form>
+            <br>
+
+
+            <form action="changePasswordForms/dbChangePass.php" class="passwordChangeConpanelForm" method="post">
+                <input type="submit" value="Změnit heslo PhpMyAdmin" name="passChangeDB" class="zmenaHeslaBtn">
+            </form>
 
 
         </section>
