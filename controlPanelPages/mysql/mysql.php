@@ -1,4 +1,5 @@
 <?php
+ob_start();
 include_once("dbcon.php");
 
 ?>
@@ -18,8 +19,7 @@ include_once("dbcon.php");
 <script>
     var paraInit = document.createElement("p");
     var consInit = document.getElementById("consoleContent");
-    paraInit.innerHTML = "Vítá Vás konzole PitrShell 1.0 <br> Pro zadání příkazů použijte textové pole dole a tlačítko 'Odeslat dotaz'. " +
-        "<br> Konzole aktuálně nevrací chyby protože to z nějakého důvodu odjebává FTP manager :)"
+    paraInit.innerHTML = "Vítá Vás konzole PitrShell 1.0 <br> Pro zadání příkazů použijte textové pole dole a tlačítko 'Odeslat dotaz'."
     consInit.append(paraInit);
 
     function changeContent() {
@@ -44,7 +44,7 @@ include_once("dbcon.php");
             },
             error: function(){
                 var paraResponse1 = document.createElement("p");
-                var response = "Invalid SQL query, check your syntax!";
+                var response = "Špatný SQL požadavek, zkotroluj dotaz.";
                 paraResponse1.innerHTML = response;
                 cons.append(paraResponse1);
             }

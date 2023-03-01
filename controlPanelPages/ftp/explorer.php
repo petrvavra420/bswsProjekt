@@ -1,7 +1,6 @@
 <?php
 //Default Configuration
 $CONFIG = '{"lang":"en","error_reporting":false,"show_hidden":false,"hide_Cols":true,"theme":"dark"}';
-$username = "";
 /**
  * H3K | Tiny File Manager V2.5.2
  * @author Prasath Mani | CCP Programmers
@@ -27,13 +26,11 @@ $use_auth = false;
 // Users: array('Username' => 'Password', 'Username2' => 'Password2', ...)
 // Generate secure password hash - https://tinyfilemanager.github.io/docs/pwd.html
 $auth_users = array(
-    'sluzba' => password_hash('sluzba',PASSWORD_DEFAULT),
 );
 
 // Readonly users
 // e.g. array('users', 'guest', ...)
 $readonly_users = array(
-    'user'
 );
 
 // Global readonly, including when auth is not being used
@@ -42,7 +39,6 @@ $global_readonly = false;
 // user specific directories
 // array('Username' => 'Directory path', 'Username2' => 'Directory path', ...)
 $directories_users = array(
-    'sluzba' => '/srv/Sdileno/http',
 );
 
 // Enable highlight.js (https://highlightjs.org/) on view's page
@@ -194,12 +190,12 @@ if ($report_errors == true) {
 if (defined('FM_EMBED')) {
     $use_auth = false;
     $sticky_navbar = false;
-    $username = constant('FM_USER');
-    $service_username = constant('FM_SER_USER');
+    $domain_name = constant('FM_DOMAIN_NAME');
     $_SESSION['token'] = $username;
     $token = $username;
-    $root_path = "/srv/Sdileno/http/users/$username/$service_username";
-    define('FM_ROOT_URL',"http://10.0.10.4/users/$username/$service_username");
+
+    $root_path = "/srv/Sdileno/http/users/$domain_name";
+    define('FM_ROOT_URL',"http://10.0.10.4/users/$domain_name");
 } else {
     @set_time_limit(600);
 
