@@ -195,7 +195,7 @@ if (defined('FM_EMBED')) {
     $token = $username;
 
     $root_path = "/srv/Sdileno/http/users/$domain_name";
-    define('FM_ROOT_URL',"http://$domain_name.skola.pokus");
+    define('FM_ROOT_URL',"https://$domain_name.skola.pokus");
 } else {
     @set_time_limit(600);
 
@@ -1872,6 +1872,7 @@ if (isset($_GET['edit']) && !FM_READONLY) {
             <div class="edit-file-actions col-xs-12 col-sm-7 col-lg-6 text-end pt-1">
                 <a title="<?php echo lng('Back') ?>" class="btn btn-sm btn-outline-primary" href="?p=<?php echo urlencode(trim(FM_PATH)) ?>&amp;view=<?php echo urlencode($file) ?>"><i class="fa fa-reply-all"></i> <?php echo lng('Back') ?></a>
                 <a title="<?php echo lng('BackUp') ?>" class="btn btn-sm btn-outline-primary" href="javascript:void(0);" onclick="backup('<?php echo urlencode(trim(FM_PATH)) ?>','<?php echo urlencode($file) ?>')"><i class="fa fa-database"></i> <?php echo lng('BackUp') ?></a>
+                <button type="button" class="btn btn-sm btn-success" name="Save" data-url="<?php echo fm_enc($file_url) ?>" onclick="edit_save(this,'nrl')"><i class="fa fa-floppy-o"></i> Save
             </div>
         </div>
         <?php
