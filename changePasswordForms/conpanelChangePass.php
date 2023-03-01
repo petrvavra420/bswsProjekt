@@ -1,16 +1,62 @@
 <?php
-    if (isset($_POST['inputPassChangeConpanel'])){
-        echo "OK";
-        if (isset($_POST['currPass'])){
-            $currPass = $_POST['currPass'];
-        }
-        if (isset($_POST['newPass'])){
-            $newPass = $_POST['newPass'];
-        }
-        if (isset($_POST['newPassConfirm'])){
-            $newPassConfirm = $_POST['newPassConfirm'];
-        }
+if (isset($_POST['inputPassChangeConpanel'])) {
+    $userConpanel = $_COOKIE['logged_user_conpanel'];
+
+    if (isset($_POST['currPass'])) {
+        $currPass = $_POST['currPass'];
     }
+    if (isset($_POST['newPass'])) {
+        $newPass = $_POST['newPass'];
+    }
+    if (isset($_POST['newPassConfirm'])) {
+        $newPassConfirm = $_POST['newPassConfirm'];
+    }
+    if (isset($currPass) && isset($newPass) && isset($newPassConfirm)) {
+        include_once("../dbcon.php");
+        $updateOk = true;
+        $errorMsg = "none";
+
+        $sqlUse = "use projekt";
+        $sendUse = mysqli_query($conn, $sqlUse);
+        $sql = "SELECT id, password FROM control_panel_users WHERE (login ='" . $userConpanel . "')";
+        $result = mysqli_query($conn, $sql);
+        $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+        $userFoundCount = mysqli_num_rows($result);
+
+        if ($userFoundCount == 1) {
+            if (password_verify($currPass, $row['password'])) {
+                $userConpanelId = $row["id"];
+
+                if ($newPass == $newPassConfirm) {
+                    if ($newPass == $currPass) {
+                        $updateOk = false;
+                        $errorMsg = "sameAsOld";
+                    }
+                } else {
+                    $updateOk = false;
+                    $errorMsg = "passNotSame";
+                }
+
+            } else {
+                $updateOk = false;
+                $errorMsg = "wrongActualPass";
+            }
+        } else {
+            $updateOk = false;
+        }
+
+        if ($updateOk) {
+            echo "iduser: ".$userConpanelId;
+            $newPassHashed = password_hash($newPass, PASSWORD_DEFAULT);
+            $sqlUpdate = "UPDATE control_panel_users SET password = '$newPassHashed' WHERE id = $userConpanelId";
+            $result = mysqli_query($conn, $sqlUpdate);
+            echo "<script>alert('Heslo úspěšně změněno.')</script>";
+            header("Location: ../controlPanel.php");
+        }
+
+
+    }
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -27,7 +73,7 @@
 
 <nav>
     <div class="header">
-        <a class="noDecor" href="index.php">
+        <a class="noDecor" href="../index.php">
             <img class="logoMain" src="../img/logo.svg">
             W e b h o s t i n g
         </a>
@@ -65,9 +111,32 @@
                 <input required class="inputTextPass" name="newPassConfirm" type="password">
             </span>
             <br>
+            <span class="flexCenter" id="passErrorMsg">
+                <?php
+                if (isset($errorMsg)) {
+                    if ($errorMsg != "none") {
+                        switch ($errorMsg) {
+                            case "sameAsOld":
+                                echo "Zadané heslo je shodné s aktuálním heslem!";
+                                break;
+                            case "passNotSame":
+                                echo "Hesla se neshodují!";
+                                break;
+                            case "wrongActualPass":
+                                echo "Zadané heslo není správné!";
+                                break;
+                        }
+                    }
+                }
+                ?>
+            </span>
+            <br>
+
             <span class="flexCenter">
             <input class="inputSubmitPass" value="Potvrdit" name="inputPassChangeConpanel" type="submit">
             </span>
+
+
         </form>
     </div>
 </main>
