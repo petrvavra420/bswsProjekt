@@ -98,7 +98,7 @@ if (isset($_POST['inputPassChangeConpanel'])) {
 
     <div class="passChangeConpanelContent">
         <form method="post" class="passChangeConpanelForm">
-            <h4>Aktuální heslo</h4>
+            <h4>Aktuální heslo ovl. panelu</h4>
             <span class="flexCenter">
                 <input required class="inputTextPass" name="currPass" type="password">
             </span>
