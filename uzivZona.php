@@ -12,14 +12,63 @@ ob_start();
     ?>
     <html>
     <head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<?php
+    session_start();
+    if (!isset($_SESSION['what_i_need_to_load_uziv'])) {
+        $_SESSION['what_i_need_to_load_uziv'] = "orderService";
+
+    }
+    ?>
         <title>Webhosting</title>
         <link rel="stylesheet" href="css/mainPage.css">
         <link rel="stylesheet" href="css/loginUzivZona.css">
         <link rel="stylesheet" href="css/uzivZona.css">
         <link rel="stylesheet" href="css/loader.css">
 
+        <script>
+        function openTab(nazevZalozky) {
+
+            if (nazevZalozky != null) {
+                $.ajax({
+                    url: 'controlPanelPages/ftp/set_session_value.php',
+                    type: 'POST',
+                    data: {what_i_need_to_load_uziv: nazevZalozky},
+                });
+
+                var tabcontent;
+
+                tabcontent = document.getElementsByClassName("tabContent");
+
+                for (i = 0; i < tabcontent.length; i++) {
+                    tabcontent[i].style.display = "none";
+                }
+
+
+                document.getElementById(nazevZalozky).style.display = "block";
+
+            }
+        }
+
+        function logout() {
+            // Call a PHP script using AJAX
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function () {
+                if (this.readyState == 4 && this.status == 200) {
+                    console.log(this.responseText);
+                }
+            };
+            xhttp.open("GET", "logout/controlLogout.php", true);
+            xhttp.send();
+        }
+
+        function openPhpMyAdmin() {
+            location.href = "http://10.0.10.4/phpmyadmin/";
+        }
+    </script>
+
     </head>
-    <body>
+    <body onload="openTab('<?php echo $_SESSION['what_i_need_to_load_uziv']; ?>')">
 
 
     <nav>
@@ -48,10 +97,10 @@ ob_start();
     </nav>
     <main class="uzivZonaMain">
         <aside>
-            <button class="tabLinks" onclick="openTab(event, 'orderService')" id="defaultOpen">Objednat službu</button>
-            <button class="tabLinks" onclick="openTab(event, 'serviceList')">Přehled vašich služeb</button>
-            <button class="tabLinks" onclick="openTab(event, 'payments')">Platby</button>
-            <button class="tabLinks" onclick="openTab(event, 'account')">Účet</button>
+        <button onclick="openTab('orderService')">Objednat službu</button>
+        <button onclick="openTab('serviceList')">Přehled vašich služeb</button>
+        <button onclick="openTab('payments')">Platby</button>
+        <button onclick="openTab('account')">Účet</button>
             <form class="odhlasitForm" method="post">
                 <input type="submit" value="Odhlásit" name="odhlasitUzivzona" class="odhlasitBtn">
             </form>
@@ -206,6 +255,7 @@ ob_start();
                     shell_exec("/srv/Sdileno/.scripts/remove_domain.sh $domain_name $usernameMain $login");
                     $sql = "DELETE FROM control_panel_users WHERE login = '$login'";
                     $result = mysqli_query($conn, $sql);
+                    header('Location: '.$_SERVER['REQUEST_URI']);
                 }
                 if (isset($_POST['gotoUzivZona'])) {
                     $domain_name = $_POST['gotoUzivZona'];
@@ -267,34 +317,6 @@ ob_start();
         });
 
     </script>
-
-
-    <script>
-
-        function openTab(evt, nazevZalozky) {
-            var i, tabcontent, tablinks;
-            tabcontent = document.getElementsByClassName("tabContent");
-            for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = "none";
-            }
-            tablinks = document.getElementsByClassName("tabLinks");
-            for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].className = tablinks[i].className.replace(" active", "");
-            }
-            document.getElementById(nazevZalozky).style.display = "block";
-            evt.currentTarget.className += " active";
-        }
-
-        function logout() {
-            document.cookie = "is_logged=false";
-            document.location.href = 'index.php';
-
-        }
-
-        document.getElementById("defaultOpen").click();
-    </script>
-
-
 <?php
 ob_end_flush();
 ?>
