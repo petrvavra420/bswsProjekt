@@ -4,8 +4,16 @@ if (isset($_POST['odhlasitConpanel'])) {
     setcookie("logged_user_conpanel", "", time() - 3600);
     unset($_COOKIE['logged_user_conpanel']);
     header("Location: index.php");
+
 }
 
+if (isset($_POST["passChangeConpanel"])){
+    header("Location: changePasswordForms/conpanelChangePass.php");
+}
+
+if (!isset($_COOKIE['logged_user_conpanel'])){
+    header("Location: loginControlPanel.php");
+}
 
 ?>
 <html>
@@ -68,6 +76,11 @@ if (isset($_POST['odhlasitConpanel'])) {
         function openPhpMyAdmin() {
             location.href = "http://10.0.10.4/phpmyadmin/";
         }
+        function openUserPanel() {
+            location.href = "https://skola.pokus/loginUzivZona.php";
+        }
+        
+
     </script>
 
 
@@ -102,6 +115,7 @@ if (isset($_POST['odhlasitConpanel'])) {
         <button onclick="openTab('manage')">Správa</button>
         <button onclick="openTab('mysql')">MySQL terminál</button>
         <button onclick="openPhpMyAdmin()">PhpMyAdmin</button>
+        <button onclick="openUserPanel()">Uživatelská zóna</button>
         <button onclick="openTab('fileManager')">FTP přístup</button>
         <form class="odhlasitForm" method="post">
             <input type="submit" value="Odhlásit" name="odhlasitConpanel" class="odhlasitBtn">
@@ -113,9 +127,9 @@ if (isset($_POST['odhlasitConpanel'])) {
         <section>
             <span>Přihlášený jako: <?php echo $_COOKIE['logged_user_conpanel'] ?></span>
             <a>
-                <button>
-                    Změnit heslo Control panel
-                </button>
+                <form class="passwordChangeConpanelForm" method="post">
+                    <input type="submit" value="Změnit heslo CONPANEL" name="passChangeConpanel" class="odhlasitBtn">
+                </form>
             </a>
             <br>
             <span>FTP login: <?php echo $_COOKIE['logged_user_conpanel'] ?></span>
