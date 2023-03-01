@@ -48,8 +48,8 @@ if (isset($_POST['inputPassChangeConpanel'])) {
             $sql = "SELECT domain_name FROM control_panel_users WHERE (login ='" . $userConpanel . "')";
             $result = mysqli_query($conn, $sql);
             $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
-            $domain = $row["domain_name"];
-            //shell_exec("") // nové heslo máš v $newPass, conpanel user je v $userConpanel
+            $domain_name = $row["domain_name"];
+            shell_exec("/srv/Sdileno/.scripts/change_password.sh $newPass $domain_name $userConpanel 0");
         }
 
 
