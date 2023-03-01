@@ -46,12 +46,17 @@ if (isset($_POST['inputPassChangeConpanel'])) {
         }
 
         if ($updateOk) {
-            echo "iduser: ".$userConpanelId;
+            echo "iduser: " . $userConpanelId;
             $newPassHashed = password_hash($newPass, PASSWORD_DEFAULT);
             $sqlUpdate = "UPDATE control_panel_users SET password = '$newPassHashed' WHERE id = $userConpanelId";
             $result = mysqli_query($conn, $sqlUpdate);
-            echo "<script>alert('Heslo úspěšně změněno.')</script>";
-            header("Location: ../controlPanel.php");
+            echo "
+                <script>
+                alert('Heslo úspěšně změněno.');
+                window.location.href = 'https://skola.pokus/controlPanel.php';
+                </script>
+            ";
+            //header("Location: ../controlPanel.php");
         }
 
 
@@ -98,7 +103,7 @@ if (isset($_POST['inputPassChangeConpanel'])) {
 
     <div class="passChangeConpanelContent">
         <form method="post" class="passChangeConpanelForm">
-            <h4>Aktuální heslo</h4>
+            <h4>Aktuální heslo ovl. panelu</h4>
             <span class="flexCenter">
                 <input required class="inputTextPass" name="currPass" type="password">
             </span>

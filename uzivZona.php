@@ -79,18 +79,22 @@ ob_start();
             </a>
         </div>
 
-        <div class="divStretch"> Přihlášený uživatel:
+        <div class="divStretch">
             <?php
             if (isset($_COOKIE['logged_user'])) {
-                echo $_COOKIE['logged_user'];
-            }else {
+
+            } else {
                 echo "test";
                 header("Location: loginUzivZona.php");
             }
             ?>
         </div>
         <div class="uzivZonaHeader">
-            <button class="uzivZonaHeaderNadpis">Uživatelská zóna</button>
+            <button class="uzivZonaHeaderNadpis">Uživatelská zóna
+                <div class="uzivZonaHeaderLoggedUser">
+                    <?php  echo $_COOKIE['logged_user'];?>
+                </div>
+            </button>
 
         </div>
 
@@ -109,8 +113,7 @@ ob_start();
         <div id="orderService" class="tabContent">
             <section>
                 <div class="flexCenter">
-                    <form action="" name="form"
-                          method="post">
+                    <form action="" name="form" method="post" onsubmit="showLoader()">
 
                         <div class="flexCenter">
                             <p class="uzivZonaNadpis">Zvolte název domény
@@ -210,7 +213,7 @@ ob_start();
                     }
 
                     shell_exec("/srv/Sdileno/.scripts/new_domain.sh $domainName $usernameMain $password $wantDb $username '$passwordHashed'");
-
+                    echo "<script>alert('Doména vytvořna.')</script>";
                 }
                 ?>
             </section>
@@ -222,7 +225,7 @@ ob_start();
                 mysqli_query($conn, "use projekt");
                 $usernameMain = $_COOKIE['logged_user'];
 
-                $sql = "SELECT domain_name, login FROM `control_panel_users` LEFT JOIN uz_zona_login ON uz_zona_login_id = control_panel_users.uz_zona_login_id WHERE username = '$usernameMain'";
+                $sql = "SELECT domain_name, login FROM control_panel_users LEFT JOIN uz_zona_login ON uz_zona_login.id = control_panel_users.uz_zona_login_id WHERE username = '$usernameMain'";
                 $result = mysqli_query($conn, $sql);
                 ?>
 
@@ -255,6 +258,8 @@ ob_start();
 
                     shell_exec("/srv/Sdileno/.scripts/remove_domain.sh $domain_name $usernameMain $login");
                     $sql = "DELETE FROM control_panel_users WHERE login = '$login'";
+                    $result = mysqli_query($conn, $sql);
+                    $sql = "DELETE FROM database_users WHERE login = '$login'";
                     $result = mysqli_query($conn, $sql);
                     header('Location: '.$_SERVER['REQUEST_URI']);
                 }
@@ -307,11 +312,11 @@ ob_start();
         }
 
         //refresh page when user uses the browser go back button
-        window.addEventListener( "pageshow", function ( event ) {
+        window.addEventListener("pageshow", function (event) {
             var historyTraversal = event.persisted ||
-                ( typeof window.performance != "undefined" &&
-                    window.performance.navigation.type === 2 );
-            if ( historyTraversal ) {
+                (typeof window.performance != "undefined" &&
+                    window.performance.navigation.type === 2);
+            if (historyTraversal) {
                 // Handle page restore.
                 window.location.reload();
             }

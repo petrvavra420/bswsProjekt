@@ -106,7 +106,11 @@ if (!isset($_COOKIE['logged_user_conpanel'])) {
                 */ ?>
     </div>
     <div class="uzivZonaHeader">
-        <button class="uzivZonaHeaderNadpis">Ovládací panel</button>
+        <button class="uzivZonaHeaderNadpis">Ovládací panel
+            <div class="uzivZonaHeaderLoggedUser">
+                <?php  echo $_COOKIE['logged_user_conpanel'];?>
+            </div>
+        </button>
 
     </div>
 

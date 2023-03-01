@@ -22,7 +22,7 @@ if (mysqli_num_rows($result) == 0) {
     $statement->bind_param("sss", $username, $passwordHashed, $email);
     $statement->execute();
     $statement->close();
-    shell_exec(""); //$username, $password nebo $passwordHashed
+//    shell_exec(""); //$username, $password nebo $passwordHashed
     header("Location: index.php");
 } else {
     header("Location: registrationUzivZona.php?error=1");

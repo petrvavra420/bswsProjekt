@@ -160,6 +160,8 @@
     text-align: center;
     display: flex;
     justify-content: center;
+    font-size: 1.3em;
+    color: #77F2A1;
 }
 .manageDesc{
     font-family: montserrat-regular;
@@ -167,10 +169,13 @@
     justify-content: center;
     margin: 1em;
     margin-bottom: 2em;
+    font-size: 1.2em;
+    color: #77F2A1;
 }
 .manageDescUser{
     font-family: montserrat-regular;
     font-weight: bold;
+    color: #77F2A1;
 
 }
 
@@ -179,7 +184,7 @@
     background-color: #4F76F6;
     transition: 0.05s;
     text-align: center;
-    width: 100%;
+    width: 30%;
     height: 100%;
     color: #F9F9F9;
     font-size: 1.2em;
@@ -187,6 +192,27 @@
     font-weight: bold;
     padding-top: 1em;
     padding-bottom: 1em;
+    transition: 0.1s;
+}
+.zmenaHeslaBtn:hover{
+    cursor: pointer;
+    background-color: #1c2429;
+    color: #77F2A1;
+    transition: 0.1s;
+    border-left: 3px solid #77F2A1;
+    border-right:  3px solid #77F2A1;
+}
+
+
+.passwordChangeConpanelForm {
+    display: flex;
+    justify-content: center;
+}
+
+.uzivZonaHeaderLoggedUser{
+    font-family: montserrat-regular;
+    font-weight: normal;
+    font-size: 0.8em;
 }
 
 
