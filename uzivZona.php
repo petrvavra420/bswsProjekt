@@ -34,7 +34,7 @@ ob_start();
             <?php
             if (isset($_COOKIE['logged_user'])) {
                 echo $_COOKIE['logged_user'];
-            }else {
+            } else {
                 echo "test";
                 header("Location: loginUzivZona.php");
             }
@@ -60,8 +60,7 @@ ob_start();
         <div id="orderService" class="tabContent">
             <section>
                 <div class="flexCenter">
-                    <form action="" name="form"
-                          method="post">
+                    <form action="" name="form" method="post" onsubmit="showLoader()">
 
                         <div class="flexCenter">
                             <p class="uzivZonaNadpis">Zvolte název domény
@@ -257,11 +256,11 @@ ob_start();
         }
 
         //refresh page when user uses the browser go back button
-        window.addEventListener( "pageshow", function ( event ) {
+        window.addEventListener("pageshow", function (event) {
             var historyTraversal = event.persisted ||
-                ( typeof window.performance != "undefined" &&
-                    window.performance.navigation.type === 2 );
-            if ( historyTraversal ) {
+                (typeof window.performance != "undefined" &&
+                    window.performance.navigation.type === 2);
+            if (historyTraversal) {
                 // Handle page restore.
                 window.location.reload();
             }
