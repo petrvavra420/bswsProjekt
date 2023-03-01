@@ -255,6 +255,8 @@ ob_start();
                     shell_exec("/srv/Sdileno/.scripts/remove_domain.sh $domain_name $usernameMain $login");
                     $sql = "DELETE FROM control_panel_users WHERE login = '$login'";
                     $result = mysqli_query($conn, $sql);
+                    $sql = "DELETE FROM database_users WHERE login = '$login'";
+                    $result = mysqli_query($conn, $sql);
                     header('Location: '.$_SERVER['REQUEST_URI']);
                 }
                 if (isset($_POST['gotoUzivZona'])) {
