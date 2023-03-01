@@ -1,7 +1,6 @@
 <?php
 //Default Configuration
 $CONFIG = '{"lang":"en","error_reporting":false,"show_hidden":false,"hide_Cols":true,"theme":"dark"}';
-$username = "";
 /**
  * H3K | Tiny File Manager V2.5.2
  * @author Prasath Mani | CCP Programmers
@@ -27,13 +26,11 @@ $use_auth = false;
 // Users: array('Username' => 'Password', 'Username2' => 'Password2', ...)
 // Generate secure password hash - https://tinyfilemanager.github.io/docs/pwd.html
 $auth_users = array(
-    'sluzba' => password_hash('sluzba',PASSWORD_DEFAULT),
 );
 
 // Readonly users
 // e.g. array('users', 'guest', ...)
 $readonly_users = array(
-    'user'
 );
 
 // Global readonly, including when auth is not being used
@@ -42,7 +39,6 @@ $global_readonly = false;
 // user specific directories
 // array('Username' => 'Directory path', 'Username2' => 'Directory path', ...)
 $directories_users = array(
-    'sluzba' => '/srv/Sdileno/http',
 );
 
 // Enable highlight.js (https://highlightjs.org/) on view's page
@@ -194,12 +190,12 @@ if ($report_errors == true) {
 if (defined('FM_EMBED')) {
     $use_auth = false;
     $sticky_navbar = false;
-    $username = constant('FM_USER');
-    $service_username = constant('FM_SER_USER');
+    $domain_name = constant('FM_DOMAIN_NAME');
     $_SESSION['token'] = $username;
     $token = $username;
-    $root_path = "/srv/Sdileno/http/users/$username/$service_username";
-    define('FM_ROOT_URL',"http://10.0.10.4/users/$username/$service_username");
+
+    $root_path = "/srv/Sdileno/http/users/$domain_name";
+    define('FM_ROOT_URL',"http://$domain_name.skola.pokus");
 } else {
     @set_time_limit(600);
 
@@ -1670,7 +1666,9 @@ if (isset($_GET['view'])) {
         <div class="col-12">
             <p class="break-word"><b><?php echo lng($view_title) ?> "<?php echo fm_enc(fm_convert_win($file)) ?>"</b></p>
             <p class="break-word">
-                <strong>Full path:</strong> <?php echo fm_enc(fm_convert_win($file_path)) ?><br>
+                <strong>Full path:</strong> <?php
+                 $corect_file_path = explode("users",$file_path); //Hide full server patch to users
+                 echo fm_enc(fm_convert_win($corect_file_path[1])) ?><br>
                 <strong>File size:</strong> <?php echo ($filesize_raw <= 1000) ? "$filesize_raw bytes" : $filesize; ?><br>
                 <strong>MIME-type:</strong> <?php echo $mime_type ?><br>
                 <?php
@@ -1874,17 +1872,6 @@ if (isset($_GET['edit']) && !FM_READONLY) {
             <div class="edit-file-actions col-xs-12 col-sm-7 col-lg-6 text-end pt-1">
                 <a title="<?php echo lng('Back') ?>" class="btn btn-sm btn-outline-primary" href="?p=<?php echo urlencode(trim(FM_PATH)) ?>&amp;view=<?php echo urlencode($file) ?>"><i class="fa fa-reply-all"></i> <?php echo lng('Back') ?></a>
                 <a title="<?php echo lng('BackUp') ?>" class="btn btn-sm btn-outline-primary" href="javascript:void(0);" onclick="backup('<?php echo urlencode(trim(FM_PATH)) ?>','<?php echo urlencode($file) ?>')"><i class="fa fa-database"></i> <?php echo lng('BackUp') ?></a>
-                <?php if ($is_text) { ?>
-                    <?php if ($isNormalEditor) { ?>
-                        <a title="Advanced" class="btn btn-sm btn-outline-primary" href="?p=<?php echo urlencode(trim(FM_PATH)) ?>&amp;edit=<?php echo urlencode($file) ?>&amp;env=ace"><i class="fa fa-pencil-square-o"></i> <?php echo lng('AdvancedEditor') ?></a>
-                        <button type="button" class="btn btn-sm btn-success" name="Save" data-url="<?php echo fm_enc($file_url) ?>" onclick="edit_save(this,'nrl')"><i class="fa fa-floppy-o"></i> Save
-                        </button>
-                    <?php } else { ?>
-                        <a title="Plain Editor" class="btn btn-sm btn-outline-primary" href="?p=<?php echo urlencode(trim(FM_PATH)) ?>&amp;edit=<?php echo urlencode($file) ?>"><i class="fa fa-text-height"></i> <?php echo lng('NormalEditor') ?></a>
-                        <button type="button" class="btn btn-sm btn-success" name="Save" data-url="<?php echo fm_enc($file_url) ?>" onclick="edit_save(this,'ace')"><i class="fa fa-floppy-o"></i> <?php echo lng('Save') ?>
-                        </button>
-                    <?php } ?>
-                <?php } ?>
             </div>
         </div>
         <?php
@@ -3920,7 +3907,7 @@ $isStickyNavBar = $sticky_navbar ? 'navbar-fixed' : 'navbar-normal';
         var n = new XMLHttpRequest,
             a = "path=" + e + "&file=" + t + "&token="+ window.csrf +"&type=backup&ajax=true";
         return n.open("POST", "", !0), n.setRequestHeader("Content-type", "application/x-www-form-urlencoded"), n.onreadystatechange = function () {
-            4 == n.readyState && 200 == n.status && toast(n.responseText)
+            4 == n.readyState && 200 == n.status
         }, n.send(a), !1
     }
     // Toast message

@@ -171,8 +171,7 @@ if (isset($_POST['odhlasitConpanel'])) {
                 $domain_name = $resultArray['domain_name'];
 
                 define('FM_EMBED', true);
-                define('FM_USER', $username);
-                define('FM_SER_USER', $domain_name);
+                define('FM_DOMAIN_NAME', $domain_name);
                 include("controlPanelPages/ftp/explorer.php");
 
             }
