@@ -43,6 +43,7 @@ include_once("dbcon.php");
                 console.log("odpoved: " + response);
                 var elem = document.getElementById('consoleContent');
                 elem.scrollTop = elem.scrollHeight;
+                inputText.value = "";
             },
             error: function(){
                 var paraResponse1 = document.createElement("p");

@@ -56,3 +56,8 @@
     padding-left: 2.2em;
     cursor: pointer;
 }
+
+#passErrorMsg{
+    color: red;
+    font-family: montserrat-regular;
+}
