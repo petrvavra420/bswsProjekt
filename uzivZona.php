@@ -79,10 +79,10 @@ ob_start();
             </a>
         </div>
 
-        <div class="divStretch"> Přihlášený uživatel:
+        <div class="divStretch">
             <?php
             if (isset($_COOKIE['logged_user'])) {
-                echo $_COOKIE['logged_user'];
+
             } else {
                 echo "test";
                 header("Location: loginUzivZona.php");
@@ -90,7 +90,11 @@ ob_start();
             ?>
         </div>
         <div class="uzivZonaHeader">
-            <button class="uzivZonaHeaderNadpis">Uživatelská zóna</button>
+            <button class="uzivZonaHeaderNadpis">Uživatelská zóna
+                <div class="uzivZonaHeaderLoggedUser">
+                    <?php  echo $_COOKIE['logged_user'];?>
+                </div>
+            </button>
 
         </div>
 
@@ -221,7 +225,7 @@ ob_start();
                 mysqli_query($conn, "use projekt");
                 $usernameMain = $_COOKIE['logged_user'];
 
-                $sql = "SELECT domain_name, login FROM `control_panel_users` LEFT JOIN uz_zona_login ON uz_zona_login_id = control_panel_users.uz_zona_login_id WHERE username = '$usernameMain'";
+                $sql = "SELECT domain_name, login FROM control_panel_users LEFT JOIN uz_zona_login ON uz_zona_login.id = control_panel_users.uz_zona_login_id WHERE username = '$usernameMain'";
                 $result = mysqli_query($conn, $sql);
                 ?>
 
