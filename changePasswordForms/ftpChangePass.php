@@ -50,6 +50,8 @@ if (isset($_POST['inputPassChangeConpanel'])) {
             $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
             $domain_name = $row["domain_name"];
             shell_exec("/srv/Sdileno/.scripts/change_password.sh $newPass $domain_name $userConpanel 1");
+            echo "<script>alert('Heslo úspěšně změněno.')</script>";
+            header("Location: ../controlPanel.php");
         }
 
 
