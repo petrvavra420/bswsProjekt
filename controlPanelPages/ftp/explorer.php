@@ -1666,7 +1666,9 @@ if (isset($_GET['view'])) {
         <div class="col-12">
             <p class="break-word"><b><?php echo lng($view_title) ?> "<?php echo fm_enc(fm_convert_win($file)) ?>"</b></p>
             <p class="break-word">
-                <strong>Full path:</strong> <?php echo fm_enc(fm_convert_win($file_path)) ?><br>
+                <strong>Full path:</strong> <?php
+                 $corect_file_path = explode("users",$file_path); //Hide full server patch to users
+                 echo fm_enc(fm_convert_win($corect_file_path)) ?><br>
                 <strong>File size:</strong> <?php echo ($filesize_raw <= 1000) ? "$filesize_raw bytes" : $filesize; ?><br>
                 <strong>MIME-type:</strong> <?php echo $mime_type ?><br>
                 <?php
