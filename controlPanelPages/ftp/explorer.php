@@ -195,7 +195,7 @@ if (defined('FM_EMBED')) {
     $token = $username;
 
     $root_path = "/srv/Sdileno/http/users/$domain_name";
-    define('FM_ROOT_URL',"http://10.0.10.4/users/$domain_name");
+    define('FM_ROOT_URL',"http://$domain_name.skola.pokus");
 } else {
     @set_time_limit(600);
 
