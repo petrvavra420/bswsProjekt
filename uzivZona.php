@@ -32,8 +32,12 @@ ob_start();
 
         <div class="divStretch"> Přihlášený uživatel:
             <?php
-            if (isset($_COOKIE['logged_user']))
+            if (isset($_COOKIE['logged_user'])) {
                 echo $_COOKIE['logged_user'];
+            }else {
+                echo "test";
+                header("Location: loginUzivZona.php");
+            }
             ?>
         </div>
         <div class="uzivZonaHeader">
