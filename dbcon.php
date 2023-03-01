@@ -1,6 +1,5 @@
 <?php
 $servername = "10.0.10.4:3306";
-
 $usernameDB = "peta";
 $passwordDB = "petadb69";
 

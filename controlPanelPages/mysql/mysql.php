@@ -16,6 +16,12 @@ include_once("dbcon.php");
     </div>
 </div>
 <script>
+    var paraInit = document.createElement("p");
+    var consInit = document.getElementById("consoleContent");
+    paraInit.innerHTML = "Vítá Vás konzole PitrShell 1.0 <br> Pro zadání příkazů použijte textové pole dole a tlačítko 'Odeslat dotaz'. " +
+        "<br> Konzole aktuálně nevrací chyby protože to z nějakého důvodu odjebává FTP manager :)"
+    consInit.append(paraInit);
+
     function changeContent() {
         var inputText = document.getElementById("consoleInput");
         var text = inputText.value;
@@ -26,7 +32,7 @@ include_once("dbcon.php");
         console.log(text);
         $.ajax({
             url: 'controlPanelPages/mysql/handleQuerry.php',
-            type: 'post',
+            type: 'POST',
             data: {sql: text},
             success: function (response) {
                 var paraResponse = document.createElement("p");
@@ -35,8 +41,15 @@ include_once("dbcon.php");
                 console.log("odpoved: " + response);
                 var elem = document.getElementById('consoleContent');
                 elem.scrollTop = elem.scrollHeight;
+            },
+            error: function(){
+                var paraResponse1 = document.createElement("p");
+                var response = "Invalid SQL query, check your syntax!";
+                paraResponse1.innerHTML = response;
+                cons.append(paraResponse1);
             }
         });
+
 
 
     }

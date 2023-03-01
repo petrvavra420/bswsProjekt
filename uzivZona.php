@@ -16,6 +16,8 @@ if (isset($_POST['odhlasitUzivzona'])){
     <link rel="stylesheet" href="css/mainPage.css">
     <link rel="stylesheet" href="css/loginUzivZona.css">
     <link rel="stylesheet" href="css/uzivZona.css">
+    <link rel="stylesheet" href="css/loader.css">
+
 </head>
 <body>
 
@@ -56,20 +58,36 @@ if (isset($_POST['odhlasitUzivzona'])){
             <div class="flexCenter">
                 <form action="" name="form"
                       method="post">
+
+                    <div class="flexCenter">
                     <p class="uzivZonaNadpis">Zvolte název domény
                     </p>
-
+                    </div>
+                    <div class="flexCenter" id="marginInput">
                     <input placeholder="Název domény" class="inputText" required type="text" name="fname"><br>
+                    </div>
+                    <div class="flexCenter">
                     <input type="checkbox" name="fdb" checked value="chce!" id="checkbox">
-                    <label for="checkbox">Vytvořit SQL databázi <br></label>
+
+                    <label id="marginInput" for="checkbox">Vytvořit SQL databázi <br></label>
+                    </div>
+                    <div class="flexCenter">
                     <p class="uzivZonaNadpis">Přihlašovací udaje k doméně
                     </p>
+                    </div>
+                    <div class="flexCenter" id="marginInput">
                     <input placeholder="Uživ. jméno" class="inputText" required type="text" name="fusername"><br>
+                    </div>
+                    <div class="flexCenter" id="marginInput">
                     <input placeholder="Heslo" class="inputText" required type="password" name="fpassword"><br>
+                    </div>
+                    <div class="flexCenter" id="marginInput">
                     <input placeholder="Potvrďte heslo" class="inputText" required type="password"
-                           name="fpassword2"><br>
+                           name="fpassword2">
+                    </div><br>
+
                     <div class="flexCenter">
-                        <input class="inputSubmit" value="ok" type="submit" name="orderFormSubmit">
+                        <input class="inputSubmit" value="Objednat službu" type="submit" name="orderFormSubmit">
                     </div>
                 </form>
             </div>
@@ -155,13 +173,13 @@ if (isset($_POST['odhlasitUzivzona'])){
 
             <div class="block-container">
                 <?php foreach ($result as $block): ?>
-                    <div class="block">
-                        <h2><?php echo $block['domain_name']; ?></h2>
+                    <div class="block" id="serviceDiv">
+                        <h2 class="serviceName"><?php echo $block['domain_name'].".skola.pokus"; ?></h2>
                         <form method="post" name="deleteForm">
-                            <button name="gotoUzivZona" value="<?php echo $block['domain_name']; ?>">
-                                Otevřít
+                            <button onclick="showLoader()" class="servicesBtn" name="gotoUzivZona" value="<?php echo $block['domain_name']; ?>">
+                                Ovládací panel
                             </button>
-                            <button name="delete" value="<?php echo $block['domain_name']; ?>">
+                            <button onclick="showLoader()" class="servicesBtn" name="delete" value="<?php echo $block['domain_name']; ?>">
                                 Smazat
                             </button>
                         </form>
@@ -208,10 +226,29 @@ if (isset($_POST['odhlasitUzivzona'])){
 
 </main>
 
+<!-- Loader animaces -->
+<div class="backgroundCoverLoading" id="backgroundCoverLoading"></div>
+<div id="loader" class="loadingspinner">
+    <div id="square1"></div>
+    <div id="square2"></div>
+    <div id="square3"></div>
+    <div id="square4"></div>
+    <div id="square5"></div>
+</div>
 
 </body>
 </html>
 <script>
+    //loader
+    function showLoader() {
+        document.getElementById("loader").style.display = "block";
+        document.getElementById("backgroundCoverLoading").style.display = "block";
+
+    }
+</script>
+
+<script>
+
     function openTab(evt, nazevZalozky) {
         var i, tabcontent, tablinks;
         tabcontent = document.getElementsByClassName("tabContent");

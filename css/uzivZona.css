@@ -1,10 +1,11 @@
-.uzivZonaHeader{
+.uzivZonaHeader {
     width: 20%;
     background-color: #4F76F6;
     display: inline-block;
     position: relative;
 
 }
+
 .uzivZonaHeaderNadpis {
     background-color: #4F76F6;
     color: white;
@@ -17,10 +18,11 @@
     font-size: 20px;
 }
 
-.uzivZonaMain{
+.uzivZonaMain {
     display: flex;
     height: 100%;
 }
+
 .odhlasitBtn {
     border: none;
     background-color: #4F76F6;
@@ -34,6 +36,7 @@
     padding-top: 1em;
     padding-bottom: 1em;
 }
+
 .odhlasitForm {
     border: none;
     transition: 0.05s;
@@ -42,12 +45,14 @@
     margin-top: 0.2em;
     margin-bottom: 0.2em;
 }
+
 .odhlasitForm:hover {
     cursor: pointer;
     border-right: 4px solid #77F2A1;
     border-left: 4px solid #77F2A1;
     transition: 0.05s;
 }
+
 .odhlasitBtn:hover {
     cursor: pointer;
 
@@ -62,6 +67,7 @@
     flex-direction: column;
     background-color: rgba(79, 118, 246, 0.1);
 }
+
 .uzivZonaMain > aside > button {
     border: none;
     padding-top: 1em;
@@ -74,6 +80,7 @@
     font-size: 1.2em;
     transition: 0.05s;
 }
+
 .uzivZonaMain > aside > button:hover {
     cursor: pointer;
     border-right: 4px solid #77F2A1;
@@ -98,3 +105,50 @@
 .form {
     width: 100%;
 }
+
+#marginInput {
+    margin: 0.4em;
+    font-family: montserrat-regular;
+    font-size: 0.9em;
+}
+
+#serviceList {
+    overflow-y: scroll;
+}
+
+#serviceDiv {
+        border-bottom: 4px solid #F9F9F9;
+    padding-bottom: 1em;
+    padding-left: 1em;
+}
+
+.servicesBtn {
+    border: none;
+    background-color: #4F76F6;
+    font-family: montserrat-regular;
+    color: #F9F9F9;
+    font-size: 1.2em;
+    transition: 0.05s;
+    padding: 0.3em;
+    border-radius: 0.2em;
+    width: 15%;
+
+}
+.servicesBtn:hover {
+    cursor: pointer;
+    border-left: 3px solid #77F2A1;
+    border-right: 3px solid #77F2A1;
+}
+
+.serviceName {
+
+}
+
+#orderService {
+    overflow-y: auto;
+}
+
+
+
+
+
