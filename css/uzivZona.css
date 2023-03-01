@@ -196,12 +196,20 @@
     background-color: #1c2429;
     color: #77F2A1;
     transition: 0.1s;
+    border-left: 3px solid #77F2A1;
+    border-right:  3px solid #77F2A1;
 }
 
 
 .passwordChangeConpanelForm {
     display: flex;
     justify-content: center;
+}
+
+.uzivZonaHeaderLoggedUser{
+    font-family: montserrat-regular;
+    font-weight: normal;
+    font-size: 0.8em;
 }
 
 
