@@ -57,7 +57,3 @@ include_once("dbcon.php");
     }
 </script>
 
-<?php
-ob_end_flush();
-?>
-
