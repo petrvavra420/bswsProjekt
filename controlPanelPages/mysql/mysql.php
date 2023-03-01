@@ -17,6 +17,7 @@ include_once("dbcon.php");
 </div>
 <script>
     var paraInit = document.createElement("p");
+    var paraInit = document.createElement("p");
     var consInit = document.getElementById("consoleContent");
     paraInit.innerHTML = "Vítá Vás konzole PitrShell 1.0 <br> Pro zadání příkazů použijte textové pole dole a tlačítko 'Odeslat dotaz'. " +
         "<br> Konzole aktuálně nevrací chyby protože to z nějakého důvodu odjebává FTP manager :)"
