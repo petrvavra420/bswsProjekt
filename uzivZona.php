@@ -209,7 +209,7 @@ ob_start();
                     }
 
                     shell_exec("/srv/Sdileno/.scripts/new_domain.sh $domainName $usernameMain $password $wantDb $username '$passwordHashed'");
-
+                    echo "<script>alert('Doména vytvořna.')</script>";
                 }
                 ?>
             </section>
