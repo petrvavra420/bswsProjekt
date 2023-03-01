@@ -120,7 +120,7 @@
 }
 
 #serviceDiv {
-        border-bottom: 4px solid #F9F9F9;
+    border-bottom: 4px solid #F9F9F9;
     padding-bottom: 1em;
     padding-left: 1em;
 }
@@ -138,6 +138,7 @@
     width: 15%;
 
 }
+
 .servicesBtn:hover {
     cursor: pointer;
     border-left: 3px solid #77F2A1;
@@ -153,7 +154,7 @@
     overflow-y: auto;
 }
 
-.manageHeader{
+.manageHeader {
     margin: 1em;
     font-family: montserrat-regular;
     font-weight: bold;
@@ -163,7 +164,8 @@
     font-size: 1.3em;
     color: #77F2A1;
 }
-.manageDesc{
+
+.manageDesc {
     font-family: montserrat-regular;
     display: flex;
     justify-content: center;
@@ -172,7 +174,8 @@
     font-size: 1.2em;
     color: #77F2A1;
 }
-.manageDescUser{
+
+.manageDescUser {
     font-family: montserrat-regular;
     font-weight: bold;
     color: #77F2A1;
@@ -194,13 +197,14 @@
     padding-bottom: 1em;
     transition: 0.1s;
 }
-.zmenaHeslaBtn:hover{
+
+.zmenaHeslaBtn:hover {
     cursor: pointer;
     background-color: #1c2429;
     color: #77F2A1;
     transition: 0.1s;
     border-left: 3px solid #77F2A1;
-    border-right:  3px solid #77F2A1;
+    border-right: 3px solid #77F2A1;
 }
 
 
@@ -209,10 +213,21 @@
     justify-content: center;
 }
 
-.uzivZonaHeaderLoggedUser{
+.uzivZonaHeaderLoggedUser {
     font-family: montserrat-regular;
     font-weight: normal;
     font-size: 0.8em;
+}
+
+.noDecorConpanel {
+    text-decoration: none;
+    color: white;
+
+}
+
+.noDecorConpanel:visited {
+    text-decoration: none;
+    color: white;
 }
 
 

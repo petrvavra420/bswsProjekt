@@ -91,7 +91,7 @@ if (!isset($_COOKIE['logged_user_conpanel'])) {
 
 <nav>
     <div class="header">
-        <a class="noDecor" href="index.php">
+        <a class="noDecorConpanel" href="index.php">
             <img class="logoMain" src="img/logo.svg">
             W e b h o s t i n g
         </a>
