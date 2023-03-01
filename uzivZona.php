@@ -12,14 +12,14 @@ ob_start();
     ?>
     <html>
     <head>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<?php
-    session_start();
-    if (!isset($_SESSION['what_i_need_to_load_uziv'])) {
-        $_SESSION['what_i_need_to_load_uziv'] = "orderService";
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <?php
+        session_start();
+        if (!isset($_SESSION['what_i_need_to_load_uziv'])) {
+            $_SESSION['what_i_need_to_load_uziv'] = "orderService";
 
-    }
-    ?>
+        }
+        ?>
         <title>Webhosting</title>
         <link rel="stylesheet" href="css/mainPage.css">
         <link rel="stylesheet" href="css/loginUzivZona.css">
@@ -27,45 +27,45 @@ ob_start();
         <link rel="stylesheet" href="css/loader.css">
 
         <script>
-        function openTab(nazevZalozky) {
+            function openTab(nazevZalozky) {
 
-            if (nazevZalozky != null) {
-                $.ajax({
-                    url: 'controlPanelPages/ftp/set_session_value.php',
-                    type: 'POST',
-                    data: {what_i_need_to_load_uziv: nazevZalozky},
-                });
+                if (nazevZalozky != null) {
+                    $.ajax({
+                        url: 'controlPanelPages/ftp/set_session_value.php',
+                        type: 'POST',
+                        data: {what_i_need_to_load_uziv: nazevZalozky},
+                    });
 
-                var tabcontent;
+                    var tabcontent;
 
-                tabcontent = document.getElementsByClassName("tabContent");
+                    tabcontent = document.getElementsByClassName("tabContent");
 
-                for (i = 0; i < tabcontent.length; i++) {
-                    tabcontent[i].style.display = "none";
+                    for (i = 0; i < tabcontent.length; i++) {
+                        tabcontent[i].style.display = "none";
+                    }
+
+
+                    document.getElementById(nazevZalozky).style.display = "block";
+
                 }
-
-
-                document.getElementById(nazevZalozky).style.display = "block";
-
             }
-        }
 
-        function logout() {
-            // Call a PHP script using AJAX
-            var xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function () {
-                if (this.readyState == 4 && this.status == 200) {
-                    console.log(this.responseText);
-                }
-            };
-            xhttp.open("GET", "logout/controlLogout.php", true);
-            xhttp.send();
-        }
+            function logout() {
+                // Call a PHP script using AJAX
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        console.log(this.responseText);
+                    }
+                };
+                xhttp.open("GET", "logout/controlLogout.php", true);
+                xhttp.send();
+            }
 
-        function openPhpMyAdmin() {
-            location.href = "http://10.0.10.4/phpmyadmin/";
-        }
-    </script>
+            function openPhpMyAdmin() {
+                location.href = "http://10.0.10.4/phpmyadmin/";
+            }
+        </script>
 
     </head>
     <body onload="openTab('<?php echo $_SESSION['what_i_need_to_load_uziv']; ?>')">
@@ -92,7 +92,7 @@ ob_start();
         <div class="uzivZonaHeader">
             <button class="uzivZonaHeaderNadpis">Uživatelská zóna
                 <div class="uzivZonaHeaderLoggedUser">
-                    <?php  echo $_COOKIE['logged_user'];?>
+                    <?php echo $_COOKIE['logged_user']; ?>
                 </div>
             </button>
 
@@ -101,10 +101,10 @@ ob_start();
     </nav>
     <main class="uzivZonaMain">
         <aside>
-        <button onclick="openTab('orderService')">Objednat službu</button>
-        <button onclick="openTab('serviceList')">Přehled vašich služeb</button>
-        <button onclick="openTab('payments')">Platby</button>
-        <button onclick="openTab('account')">Účet</button>
+            <button onclick="openTab('orderService')">Objednat službu</button>
+            <button onclick="openTab('serviceList')">Přehled vašich služeb</button>
+            <button onclick="openTab('payments')">Platby</button>
+            <button onclick="openTab('account')">Účet</button>
             <form class="odhlasitForm" method="post">
                 <input type="submit" value="Odhlásit" name="odhlasitUzivzona" class="odhlasitBtn">
             </form>
@@ -232,16 +232,21 @@ ob_start();
                 <div class="block-container">
                     <?php foreach ($result as $block): ?>
                         <div class="block" id="serviceDiv">
-                            <h2 class="serviceName"><?php echo $block['domain_name'] . ".skola.pokus"; ?></h2>
-                            <form method="post" name="deleteForm">
-                                <button onclick="showLoader()" class="servicesBtn" name="gotoUzivZona"
-                                        value="<?php echo $block['domain_name']; ?>">
+
+                            <form class="serviceForm" method="post" name="deleteForm">
+                                <span class="serviceBtnFloatRight">
+                                <span class="serviceName"><?php echo $block['domain_name']; ?> <span class="serviceDomainName">.skola.pokus</span></span>
+                                    <span class="serviceBtnSpan">
+                                    <button onclick="showLoader()" class="servicesBtn" name="gotoUzivZona"
+                                            value="<?php echo $block['domain_name']; ?>">
                                     Ovládací panel
-                                </button>
-                                <button onclick="showLoader()" class="servicesBtn" name="delete"
-                                        value="<?php echo $block['domain_name']; ?>">
+                                    </button>
+                                    <button onclick="showLoader()" class="servicesBtn" name="delete"
+                                            value="<?php echo $block['domain_name']; ?>">
                                     Smazat
-                                </button>
+                                    </button>
+                                        </span>
+                                </span>
                             </form>
                         </div>
                     <?php endforeach; ?>
@@ -261,7 +266,7 @@ ob_start();
                     $result = mysqli_query($conn, $sql);
                     $sql = "DELETE FROM database_users WHERE login = '$login'";
                     $result = mysqli_query($conn, $sql);
-                    header('Location: '.$_SERVER['REQUEST_URI']);
+                    header('Location: ' . $_SERVER['REQUEST_URI']);
                 }
                 if (isset($_POST['gotoUzivZona'])) {
                     $domain_name = $_POST['gotoUzivZona'];
