@@ -294,6 +294,17 @@ if (isset($_POST['odhlasitUzivzona'])){
         document.getElementById("backgroundCoverLoading").style.display = "block";
 
     }
+
+    //refresh page when user uses the browser go back button
+    window.addEventListener( "pageshow", function ( event ) {
+            var historyTraversal = event.persisted ||
+                ( typeof window.performance != "undefined" &&
+                    window.performance.navigation.type === 2 );
+            if ( historyTraversal ) {
+                // Handle page restore.
+                window.location.reload();
+            }
+        });
 </script>
 
 <?php
