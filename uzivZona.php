@@ -235,7 +235,7 @@ ob_start();
 
                             <form class="serviceForm" method="post" name="deleteForm">
                                 <span class="serviceBtnFloatRight">
-                                <span class="serviceName"><?php echo $block['domain_name']; ?> <span class="serviceDomainName">.skola.pokus</span></span>
+                                    <a class="domainLink" href="<?php echo 'https://'.$block['domain_name'].'.skola.pokus';?>"><span class="serviceName"><?php echo $block['domain_name']; ?> <span class="serviceDomainName">.skola.pokus</span></span></a>
                                     <span class="serviceBtnSpan">
                                     <button onclick="showLoader()" class="servicesBtn" name="gotoUzivZona"
                                             value="<?php echo $block['domain_name']; ?>">
